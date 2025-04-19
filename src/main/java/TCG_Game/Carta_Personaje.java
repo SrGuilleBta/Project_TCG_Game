@@ -7,6 +7,35 @@ public class Carta_Personaje extends Habilidades_Personajes {
     private Elementos elemento; //Elemento que tiene el personaje (Pyro, Anemo, Electro, Hydro, Geo, Dentro o Cryo)
     private int vida;
 
+    private int escudo =0;
+    private int mitigacion =0;
+
+    private int danioBase=2;
+
+    public int getDanioBase() {
+        return danioBase;
+    }
+
+    public void setDanioBase(int danioBase) {
+        this.danioBase = danioBase;
+    }
+
+    public int getEscudo() {
+        return escudo;
+    }
+
+    public void setEscudo(int escudo) {
+        this.escudo = escudo;
+    }
+
+    public int getMitigacion() {
+        return mitigacion;
+    }
+
+    public void setMitigacion(int mitigacion) {
+        this.mitigacion = mitigacion;
+    }
+
     public Tipo_Arma getTipo_De_Arma() {
         return tipo_De_Arma;
     }
@@ -58,15 +87,27 @@ public class Carta_Personaje extends Habilidades_Personajes {
     }
 
 
-    public void perderVida(int danio,int escudo, int mitigacion, String elementoAplicado, String elementoReaccion){
-
-    }
+    /*public void perderVida(int danio,int escudo, int mitigacion, String elementoAplicado, String elementoReaccion){
+        //Calculo de daño a perder vida
+    }*/
 
     public void ganarVida(int puntosDeVida){
 
     }
 
-    public void ataqueBasico(){
+    public void recibirDaño(int danio){
+        vida -= danio;
+        if(vida <= 0){
+            vida = 0;
+            System.out.println("Personaje derrotado :C");
+        }else {
+            System.out.println("Vida restante "+ nombre +" :"+vida);
+        }
+    }
+    public void ataqueBasico(Carta_Personaje objetivo){
+        int danioT = this.danioBase;
+        objetivo.recibirDaño(danioT);
+        System.out.println(nombre+ " ataca a "+ objetivo.getNombre()+ " recibiendo un daño de "+ danioT);
 
     }
 }

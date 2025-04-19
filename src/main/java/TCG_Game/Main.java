@@ -27,7 +27,7 @@ public class Main {
 // Personaje: Mona
         Carta_Personaje mona = new Carta_Personaje(
                 Elementos.HYDRO,
-                7,
+                10,
                 "Mona",
                 "Astrologa Ilusoria - Cuando entra en juego, crea una Ilusión que evita el próximo daño recibido.",
                 Tipo_Arma.CATALIZADOR
@@ -106,21 +106,19 @@ public class Main {
 
 
         Juego juego1 = new Juego();
-        //juego1.iniciarRonda(personajes,cartasApoyo);
+        juego1.iniciarRonda(personajes, cartasApoyo);
 
-
-        for (int k =0; k< 3;k++)
+        for (Dados d : juego1.jugdor1.maso.dadosJuego)
         {
-            int j =0;
-            juego1.iniciarRonda(personajes,cartasApoyo);
-            for(Carta_Accion ca:juego1.jugdor1.maso.getCartasEnUso()){
-                System.out.println(j +" " +ca.nombre);
-                j+=1;
-
-            }
-            System.out.println("_____________________________________________");
-            juego1.jugdor1.termina_Ronda();
+            System.out.println(d.getTipo());
         }
+
+
+
+
+        /*El main por ahora son para pruebas especificas */
+
+
 
 
 

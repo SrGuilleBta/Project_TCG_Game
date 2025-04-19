@@ -81,4 +81,10 @@ public class Jugador {
     public void empezarRonda(){
         jugando = true;
     }
+
+    public void atacar(Jugador j)
+    {
+        //Aqui se aplicara una logica segun el jugador decida atacar
+        pSelecionado.definitiva(pSelecionado.getNombre(),j.pSelecionado);
+    }
 }
