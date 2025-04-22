@@ -1,6 +1,7 @@
 package TCG_Game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -108,6 +109,67 @@ public class Main {
         Juego juego1 = new Juego();
         juego1.iniciarRonda(personajes, cartasApoyo);
 
+        for (Dados d : juego1.jugdor1.maso.dadosJuego)
+        {
+            System.out.println(d.getTipo());
+        }
+
+
+
+
+        /*Codigo para realizar un ataque elemental
+        //juego1.jugdor1.getpSelecionado().elemental("Diluc", juego1.jugdor2.getpSelecionado());
+        System.out.println(juego1.jugdor1.getpSelecionado().getGastoElemental());
+        List<Dados>costoEP1 = new ArrayList<>();//CostoElementalPersonaje1
+        for (int i = 0; i < juego1.jugdor1.getpSelecionado().getGastoElemental(); i++)
+        {
+            Dados d = new Dados(juego1.jugdor1.getpSelecionado().getElemento());
+            costoEP1.add(d);
+        }
+        int longDados1 = juego1.jugdor1.maso.dadosJuego.size();
+        juego1.jugdor1.maso.eliminarDados(costoEP1);
+        if(longDados1 == (juego1.jugdor1.maso.dadosJuego.size()+costoEP1.size())){
+            juego1.jugdor1.getpSelecionado().elemental("Diluc", juego1.jugdor2.getpSelecionado());
+        }
+
+        // Codigo para realizar un ataque basico
+        Dados d1 = new Dados();//Asignar los dados a utilizar
+        d1.setTipo(juego1.jugdor1.getpSelecionado().getElemento());
+        Dados d2 = new Dados();
+        d2.setTipo(juego1.jugdor1.getpSelecionado().getElemento());
+        Dados d3 = new Dados();
+        d3.setTipo(Elementos.DENDRO);
+        Dados d4 = new Dados();
+        d4.setTipo(Elementos.DENDRO);*/
+
+        //Codigo para aplicar un carta de accion rapida
+
+        List<Dados>costoCAR = new ArrayList();//Costo carta accion rapida
+        Dados d1 = new Dados();//Aqui se seleccionara los dados que el usario quiero pero por mientras es una simulacion
+        d1.setTipo(Elementos.ANEMO);
+        costoCAR.add(d1);
+        Dados d2 = new Dados();
+        d2.setTipo(Elementos.GEO);
+        costoCAR.add(d2);
+        
+
+        /*
+
+
+
+
+
+
+
+        longDados1 = juego1.jugdor1.maso.dadosJuego.size();
+
+        juego1.jugdor1.maso.eliminarDados(Arrays.asList(d1, d2));
+        if(longDados1 == (juego1.jugdor1.maso.dadosJuego.size()+2)){
+            juego1.jugdor1.atacar(juego1.jugdor2);
+        }*/
+
+
+        System.out.println("------------------------------------------------------");
         for (Dados d : juego1.jugdor1.maso.dadosJuego)
         {
             System.out.println(d.getTipo());

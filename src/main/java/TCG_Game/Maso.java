@@ -2,9 +2,7 @@ package TCG_Game;
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class Maso {
@@ -81,8 +79,6 @@ public class Maso {
         for (int i = 0; i < D; i++) {
             Elementos tipoDado = dadosJuego.get(i).getTipo();
             boolean esValido = tipoDado.equals(Elementos.OMNI);
-
-
             for (Carta_Personaje p : personajes) {
                 if (tipoDado.equals(p.getElemento())) {
                     esValido = true;
@@ -98,9 +94,38 @@ public class Maso {
         }
 
     }
-    public void eliminarDados(int i){
-        dadosJuego.remove(i);
+    public void eliminarDados(List<Dados> dados){//Usado para cuando se usa un ataque
+        List<Dados> dadosJuego2 = new ArrayList<>(dadosJuego);
+        List<Boolean> eliminados = new ArrayList<>();
+        boolean eliminado = false;
+
+
+        for (Dados d : dados) {
+            eliminado = false;
+            Iterator<Dados> it = dadosJuego2.iterator();
+            while (it.hasNext()) {
+                Dados d2 = it.next();
+                if (d.getTipo().equals(d2.getTipo())) {
+                    it.remove();
+                    eliminado = true;
+                    break;
+                }else if(d2.getTipo().equals(Elementos.OMNI)){
+                    it.remove();
+                    eliminado = true;
+                    break;
+                }
+
+            }
+            eliminados.add(eliminado);
+        }
+        if(!eliminados.contains(false)){
+            dadosJuego = dadosJuego2;
+        }
+
     }
+
+
+
 
 
 }

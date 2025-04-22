@@ -1,5 +1,9 @@
 package TCG_Game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Carta_Personaje extends Habilidades_Personajes {
     private String nombre; //Nombre de la carta
     private String descripcion; //Describe que hace la carta
@@ -95,7 +99,7 @@ public class Carta_Personaje extends Habilidades_Personajes {
 
     }
 
-    public void recibirDaño(int danio){
+    public void recibirDanio(int danio){
         vida -= danio;
         if(vida <= 0){
             vida = 0;
@@ -104,9 +108,11 @@ public class Carta_Personaje extends Habilidades_Personajes {
             System.out.println("Vida restante "+ nombre +" :"+vida);
         }
     }
-    public void ataqueBasico(Carta_Personaje objetivo){
+
+
+    public void ataqueBasico(Carta_Personaje objetivo ){
         int danioT = this.danioBase;
-        objetivo.recibirDaño(danioT);
+        objetivo.recibirDanio(danioT);
         System.out.println(nombre+ " ataca a "+ objetivo.getNombre()+ " recibiendo un daño de "+ danioT);
 
     }
