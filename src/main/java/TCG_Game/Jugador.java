@@ -65,16 +65,22 @@ public class Jugador {
     public void seleccionarCartaAccion(int pos)
     {
         if(maso.cartasEnUso.get(pos) instanceof Carta_Accion_Arma){
-            setCaaApSelecionado(null);
+
             setCaaSelecionado((Carta_Accion_Arma) maso.cartasEnUso.get(pos));
+            caaApSelecionado=null;
         } else if (maso.cartasEnUso.get(pos) instanceof Carta_Accion_Apoyo) {
-            setCaaSelecionado(null);
+
             setCaaApSelecionado((Carta_Accion_Apoyo) maso.cartasEnUso.get(pos));
+            caaSelecionado=null;
         }
     }
     //Por ahora solo estan estas funciones posbilemente habra mas mientras se avanza en el proyecto
     public void  termina_Ronda()
     {
+        for (int i =0; i< 3;i++)
+        {
+            maso.personajes.get(i).setDanioBase(2);
+        }
         maso.dadosJuego.clear();
         jugando = false;
     }
@@ -85,6 +91,57 @@ public class Jugador {
     public void atacar(Jugador j)
     {
         //Aqui se aplicara una logica segun el jugador decida atacar
-        pSelecionado.definitiva(pSelecionado.getNombre(),j.pSelecionado);
+        //pSelecionado.definitiva(pSelecionado.getNombre(),j.pSelecionado);
+    }
+
+
+    public void equiparArma()
+    {
+        if(caaSelecionado != null)
+        {
+            if(caaSelecionado.getTipo_Arma() != pSelecionado.getTipo_De_Arma())
+            {
+                System.out.println("El personaje no puede usar este tipo de arma");
+            }else {
+                if (maso.dadosJuego.size() < caaSelecionado.getCosto()) {
+                    System.out.println("Dados insuficientes!");
+
+                }else {
+
+                    maso.eliminarDados(maso.dadosJuego.subList(0, caaSelecionado.getCosto()));//Eliminamos los primeros 2 dados de la lista
+                    if (pSelecionado.getArmaEquipada() != null) {
+                        System.out.println("¡Se ha reemplazado el arma equipada!");
+                    }
+
+
+                    pSelecionado.setArmaEquipada(caaSelecionado);
+                    maso.cartasEnUso.remove(caaSelecionado);
+                    caaApSelecionado = null;
+                    seleccionarCartaAccion(0);
+                }
+            }
+        }else {
+            System.out.println("No hay una arma seleccionada");
+
+        }
+
+    }
+    public void usarCartaAccion()
+    {
+        if(caaApSelecionado != null)
+        {
+            if(maso.dadosJuego.size() < caaApSelecionado.getCosto()) {
+                System.out.println("Dados insuficientes!");
+            }else {
+                    maso.eliminarDados(maso.dadosJuego.subList(0, caaApSelecionado.getCosto()));
+                    caaApSelecionado.aplicarEfecto(this);
+            }
+
+            maso.cartasEnUso.remove(caaApSelecionado);
+            caaApSelecionado = null;
+            seleccionarCartaAccion(0);
+        }else {
+            System.out.println("No hay una carta de accion seleccionada");
+        }
     }
 }

@@ -12,11 +12,12 @@ public class Juego {
         jugdor2.empezarRonda();
 
 
-        jugdor1.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
-        jugdor2.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
+
         jugdor1.maso.seleccionarDados(8);
         //jugdor2.maso.seleccionarDados(8);
         if((jugdor1.maso.cartasApoyo.isEmpty() && jugdor2.maso.cartasApoyo.isEmpty())&&(jugdor1.maso.cartasEnUso.isEmpty() && jugdor2.maso.cartasEnUso.isEmpty())) {
+            jugdor1.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
+            jugdor2.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
             for (int i =0; i<11; i++)
             {
                 //Aqui revolvemos las cartas para darles a cada jugador
@@ -34,13 +35,23 @@ public class Juego {
 
         jugdor1.selecccionarPersonaje(0);
         jugdor2.selecccionarPersonaje(2);
+        jugdor1.seleccionarCartaAccion(0);
+        //System.out.println(jugdor1.maso.getCartasEnUso().get(0).nombre);
+
+
 
     }
     public void terminaRonda() {
         if(!(jugdor1.jugando || jugdor2.jugando)) {
-            jugdor1.termina_Ronda();
+            jugdor1.termina_Ronda();//Esto va en otro lado (en el java swift sera al momento de presionar un botton)
             jugdor2.termina_Ronda();
+            for (int i =0; i<3; i++)
+            {
+                jugdor1.getMaso().getPersonajes().get(i).setEscudo(0);
+                jugdor2.getMaso().getPersonajes().get(i).setEscudo(0);
+            }
             System.out.println("Ronda terminada");
+
         }
     }
     public void cambiarPersonaje() {

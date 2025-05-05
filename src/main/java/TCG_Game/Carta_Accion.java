@@ -4,7 +4,7 @@ abstract public class Carta_Accion {
     protected String nombre; //Nombre de la carta
     protected String descripcion;//Describe que hace la carta
     protected int costo; //Define el costo de dados elementales se necesitan para usarlo
-    protected int duracion;
+
 
     public String getNombre() {
         return nombre;
@@ -22,11 +22,10 @@ abstract public class Carta_Accion {
         this.descripcion = descripcion;
     }
 
-    public Carta_Accion(String nombre, String descripcion, int costo, int duracion) {
+    public Carta_Accion(String nombre, String descripcion, int costo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.costo = costo;
-        this.duracion = duracion;
     }
 
     public int getCosto() {
@@ -37,13 +36,7 @@ abstract public class Carta_Accion {
         this.costo = costo;
     }
 
-    public int getDuracion() {
-        return duracion;
-    }
 
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
-    }
 
-    public abstract void aplicarEfecto();//Es para aplicar el efecto de la carta
+    public abstract void aplicarEfecto( Jugador jugador);//Es para aplicar el efecto de la carta
 }

@@ -2,6 +2,8 @@ package TCG_Game;
 
 public class Carta_Accion_Arma extends Carta_Accion{
     private Tipo_Arma tipo_Arma;
+    private int aumentoDanio;
+
 
     public Tipo_Arma getTipo_Arma() {
         return tipo_Arma;
@@ -11,15 +13,24 @@ public class Carta_Accion_Arma extends Carta_Accion{
         this.tipo_Arma = tipo_Arma;
     }
 
-    public Carta_Accion_Arma(String nombre, String descripcion, int costo, int duracion, Tipo_Arma tipo_Arma, int buff) {
-        super(nombre, descripcion, costo, duracion);
+    public int getAumentoDanio() {
+        return aumentoDanio;
+    }
+
+    public void setAumentoDanio(int aumentoDanio) {
+        this.aumentoDanio = aumentoDanio;
+    }
+
+    public Carta_Accion_Arma(String nombre, String descripcion, int costo, Tipo_Arma tipo_Arma, int aumentoDanio) {
+        super(nombre, descripcion, costo);
         this.tipo_Arma = tipo_Arma;
+        this.aumentoDanio = aumentoDanio;
     }
 
 
 
-    @Override
-    public void aplicarEfecto() {
-
+    @Override//Al parecer ya no se va a aplicar
+    public void aplicarEfecto(Jugador jugador) {
+        jugador.equiparArma();
     }
 }

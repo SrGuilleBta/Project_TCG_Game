@@ -1,123 +1,236 @@
 package TCG_Game;
 
 
+import java.util.List;
+
 public class Habilidades_Personajes {
-    public int gastoElemental=3;
-    public int gastoDefinitiva;
 
-    public int getGastoElemental() {
-        return gastoElemental;
-    }
 
-    public void setGastoElemental(int gastoElemental) {
-        this.gastoElemental = gastoElemental;
-    }
-
-    public int getGastoDefinitiva() {
-        return gastoDefinitiva;
-    }
-
-    public void setGastoDefinitiva(int gastoDefinitiva) {
-        this.gastoDefinitiva = gastoDefinitiva;
-    }
-
-    public void elemental(String nombre, Carta_Personaje objetivo){
-        switch(nombre) {
+    public void elemental(Carta_Personaje personajeuso, Carta_Personaje objetivo, List<Carta_Personaje> equipo){
+        personajeuso.setAtaquesRealizados(objetivo.getAtaquesRealizados()+1);
+        int danio =personajeuso.getDanioBase();
+        int vidamin=20;
+        switch(personajeuso.getNombre()) {
             case "Diluc":
                 //this.gastoElemental= 3;
-                objetivo.recibirDanio(3);
+                danio +=2;
+
                 break;
             case "Bennett":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Keqing":
-                objetivo.recibirDanio(3);
+                danio +=2;
                 break;
             case "Kujou Sara":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Furina":
-                objetivo.recibirDanio(1); // Salon Solitaire - 1 Hydro DMG (por Singer)
+                danio -=1;
+                for (Carta_Personaje companiero: equipo)
+                {
+                    if (companiero.getVida() > 0)
+                    {
+                        if(companiero.getVida() <5)
+                        {
+                            companiero.setVida(companiero.getVida() + 2);
+                        }else {
+                            companiero.setVida(companiero.getVida() + 1);
+                        }
+
+                    }
+                }
                 break;
             case "Hydro Hilichurl Rogue":
-                objetivo.recibirDanio(1); // Hydro Summon - 1 Hydro DMG (por Mimic)
+                danio -=1;
+                for (Carta_Personaje companiero: equipo)
+                {
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setEscudo(2);
+                        personajeuso.setDanioBase(personajeuso.getDanioBase() +1);
+                    }
+                }
                 break;
             case "Xianyun":
-                objetivo.recibirDanio(3);
+                danio -=1;
+                vidamin =20;
+                for (Carta_Personaje companiero: equipo){
+                    if(companiero.getVida() < vidamin)
+                    {
+                        vidamin = companiero.getVida();
+                    }
+                }
+                for (Carta_Personaje companiero: equipo)
+                {
+                    if(companiero.getVida() == vidamin)
+                    {
+                        companiero.setVida(companiero.getVida() + 2);
+                    }
+                }
                 break;
             case "Maguu Kenki":
-                objetivo.recibirDanio(3);
                 break;
             case "Chiori":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Zhongli":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Alhaitham":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Yaoyao":
-                objetivo.recibirDanio(1); // Raphanus Sky Cluster - 1 Dendro DMG (por Yuegui)
+                danio -=1;
+                vidamin=20;
+                for (Carta_Personaje companiero: equipo){
+                    if(companiero.getVida() < vidamin)
+                    {
+                        vidamin = companiero.getVida();
+                    }
+                }
+                for (Carta_Personaje companiero: equipo)
+                {
+                    if(companiero.getVida() == vidamin)
+                    {
+                        companiero.setVida(companiero.getVida() + 1);
+                    }
+                }
                 break;
             case "Ayaka":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
             case "Rosaria":
-                objetivo.recibirDanio(3);
+                danio +=1;
                 break;
         }
+        if(personajeuso.getArmaEquipada() != null)
+        {
+            danio+=personajeuso.getArmaEquipada().getAumentoDanio();//aumentamos el daño segun el arma equipada
+        }
+        objetivo.recibirDanio(danio);
     }
 
-    public void definitiva(String nombre, Carta_Personaje objetivo) {
-        switch (nombre) {
+    public void definitiva(Carta_Personaje personajeuso, Carta_Personaje objetivo, List<Carta_Personaje> equipo) {
+        personajeuso.setAtaquesRealizados(0);
+        int danio =personajeuso.getDanioBase();
+        switch (personajeuso.getNombre()) {
             case "Diluc":
-                objetivo.recibirDanio(8); // Dawn - 8 Pyro DMG
+                danio +=6; // Dawn - 8 Pyro DMG
                 break;
             case "Bennett":
-                objetivo.recibirDanio(4); // Fantastic Voyage - 4 Pyro DMG
+                danio +=2;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setDanioBase(companiero.getDanioBase() + 1);
+                        if(companiero.getVida()< 5)
+                        {
+                            companiero.setVida(companiero.getVida() + 2);
+                        }else {
+                            companiero.setVida(companiero.getVida() + 1);
+                        }
+                    }
+                }
                 break;
             case "Keqing":
-                objetivo.recibirDanio(5); // Starward Sword - 5 Electro DMG
+                danio +=3; //
                 break;
             case "Kujou Sara":
-                objetivo.recibirDanio(5); // Subjugation: Koukou Sendou - 5 Electro DMG
+                danio +=3;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setDanioBase(companiero.getDanioBase() + 1);
+                        if(companiero.getElemento() == Elementos.ELECTRO)
+                        {
+                            companiero.setVida(companiero.getVida() + 2);
+                        }
+                    }
+                }
                 break;
             case "Furina":
-                objetivo.recibirDanio(4); // Let the People Rejoice - 4 Hydro DMG
+                danio +=2;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setVida(companiero.getVida() + 1);
+                        companiero.setDanioBase(companiero.getDanioBase() + 1);
+                        if (companiero.getVida()>5)
+                        {
+                            companiero.setDanioBase(companiero.getDanioBase() + 1);
+                        }
+                    }
+                }
+
                 break;
             case "Hydro Hilichurl Rogue":
-                // Torrential Ambush - 3 o 5 Hydro DMG (asumimos 3 sin Mimic)
-                objetivo.recibirDanio(3);
+                danio +=2;
                 break;
             case "Xianyun":
-                objetivo.recibirDanio(4); // Stars Gather at Dusk - 4 Anemo DMG
+                danio +=2;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setVida(companiero.getVida() + 1);
+                    }
+                }
                 break;
             case "Maguu Kenki":
-                objetivo.recibirDanio(5); // Kyouka Fuushi - 5 Anemo/Cryo DMG
+                danio +=5; // Kyouka Fuushi - 5 Anemo/Cryo DMG
                 break;
             case "Chiori":
-                objetivo.recibirDanio(5); // Hiyoku: Twin Blades - 5 Geo DMG
+                danio +=3; // Hiyoku: Twin Blades - 5 Geo DMG
                 break;
             case "Zhongli":
-                objetivo.recibirDanio(5); // Planet Befall - 5 Geo DMG
+                danio +=4;// Planet Befall - 5 Geo DMG
+                for (Carta_Personaje companiero: equipo)
+                {
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setEscudo(4);
+                    }
+                }
+
                 break;
             case "Alhaitham":
-                objetivo.recibirDanio(5); // Fetters of Phenomena - 5 Dendro DMG
+                danio +=3;
+                personajeuso.setDanioBase(personajeuso.getDanioBase() + 1);
                 break;
             case "Yaoyao":
-                objetivo.recibirDanio(4); // Moonjade Descent - 4 Dendro DMG
+                danio +=2;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setVida(companiero.getVida() + 1);
+                    }
+                }
                 break;
             case "Ayaka":
-                objetivo.recibirDanio(5); // Kamisato Art: Soumetsu - 5 Cryo DMG
+                danio +=3;
+                personajeuso.setDanioBase(personajeuso.getDanioBase() + 1);
                 break;
             case "Rosaria":
-                objetivo.recibirDanio(5); // Rites of Termination - 5 Cryo DMG
-                break;
-            default:
-                System.out.println("Personaje no reconocido");
+                danio +=1;
+                for (Carta_Personaje companiero: equipo){
+                    if (companiero.getVida() > 0)
+                    {
+                        companiero.setDanioBase(companiero.getDanioBase() + 1);
+                    }
+                }
+                personajeuso.setDanioBase(personajeuso.getDanioBase() + 1);
                 break;
         }
+        if(personajeuso.getArmaEquipada() != null)
+        {
+            danio+=personajeuso.getArmaEquipada().getAumentoDanio();//aumentamos el daño segun el arma equipada
+        }
+        danio -= objetivo.getEscudo();
+        if(danio<0)
+        {
+            return;
+        }
+        objetivo.recibirDanio(danio);
     }
 }
 
