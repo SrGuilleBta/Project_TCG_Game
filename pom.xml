@@ -13,5 +13,13 @@
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version> <!-- Versión compatible con tu IDEA -->
+        </dependency>
+    </dependencies>
+
 
 </project>
