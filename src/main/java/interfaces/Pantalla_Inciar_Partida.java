@@ -2,16 +2,34 @@ package interfaces;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
 
+    public List<String> getPersonajes1() {
+        return personajes1;
+    }
+
+    public void setPersonajes1(List<String> personajes1) {
+        this.personajes1 = personajes1;
+    }
+
+    public List<String> getPersonajes2() {
+        return personajes2;
+    }
+
+    public void setPersonajes2(List<String> personajes2) {
+        this.personajes2 = personajes2;
+    }
+
+    public List<String> personajes1 = new ArrayList<>();
+    public List<String> personajes2 = new ArrayList<>();
 
     public Pantalla_Inciar_Partida() {
+
         setTitle("Empezar Partida");
         setSize(1250, 800);
         setResizable(false);
@@ -58,81 +76,6 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
 
 
         // Botones
-        JButton bListoJ1 = new JButton("Listo");
-        bListoJ1.setBounds(340, 540, 100, 30);
-        bListoJ1.setFocusable(false);
-        fondoLabel.add(bListoJ1);
-        bListoJ1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JButton bcancelar1 = new JButton("Cancelar");
-                bcancelar1.setBounds(340, 585, 100, 30);
-                bcancelar1.setFocusable(false);
-                fondoLabel.add(bcancelar1);
-                fondoLabel.revalidate();
-                fondoLabel.repaint();
-                for(Component c : panelj1.getComponents()) {
-                    if(c instanceof JCheckBox) {
-                        c.setEnabled(false);
-                    }
-                }
-
-
-                bcancelar1.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        fondoLabel.remove(bcancelar1);
-                        fondoLabel.revalidate();
-                        fondoLabel.repaint();
-                        for(Component c : panelj1.getComponents()) {
-                            if(c instanceof JCheckBox) {
-                                c.setEnabled(true);
-                                ((JCheckBox)c).setSelected(false);
-                            }
-                        }
-                    }
-                });
-            }
-        });
-
-
-
-        JButton bListoJ2 = new JButton("Listo");
-        bListoJ2.setBounds(805, 540, 100, 30);
-        bListoJ2.setFocusable(false);
-        fondoLabel.add(bListoJ2);
-        bListoJ2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JButton bcancelar2 = new JButton("Cancelar");
-                bcancelar2.setBounds(805, 585, 100, 30);
-                bcancelar2.setFocusable(false);
-                fondoLabel.add(bcancelar2);
-                fondoLabel.revalidate();
-                fondoLabel.repaint();
-                for(Component c : panelj2.getComponents()) {
-                    if(c instanceof JCheckBox) {
-                        c.setEnabled(false);
-                    }
-
-                }
-
-                bcancelar2.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        fondoLabel.remove(bcancelar2);
-                        fondoLabel.revalidate();
-                        fondoLabel.repaint();
-                        for(Component c : panelj2.getComponents()) {
-                            if(c instanceof JCheckBox) {
-                                c.setEnabled(true);
-                                ((JCheckBox) c).setSelected(false);
-                            }
-
-                        }
-
-                    }
-                });
-            }
-        });
-
-
         JButton bEmpezar = new JButton("Empezar");
         bEmpezar.setBounds(565, 360, 100, 30);
         bEmpezar.setFocusable(false);
@@ -156,8 +99,34 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
                 }
                 if(i ==6)
                 {
+
+
+
+
+
+                    for(Component c : panelj1.getComponents()) {
+                        if(c instanceof JCheckBox) {
+                            if(((JCheckBox) c).isSelected()) {
+                                personajes1.add(((JCheckBox) c).getText());
+                            }
+                        }
+                    }
+                    for (Component c : panelj2.getComponents()) {
+                        if(c instanceof JCheckBox) {
+                            if(((JCheckBox) c).isSelected()){
+                                personajes2.add(((JCheckBox) c).getText());
+                            }
+                        }
+                    }
+
+
+
+
+
+
+
                     setVisible(false);
-                    Pantalla_Juego p = new Pantalla_Juego();
+                    Pantalla_Juego p = new Pantalla_Juego(personajes1,personajes2);
                     p.setVisible(true);
                     dispose();
                 }else {
@@ -203,7 +172,7 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
         textPane.setText("Seleccione 3 personajes");
         textPane.setFocusable(false);
         panel.add(textPane);
-        String[] personajes = {"Diluc", "Bennet", "Keqing", "Sara", "Furina","Hydro Hilichurl", "Xianyun", "Maguu Kenki", "Chiori", "Zhongli", "Alhaitham", "YaoYao", "Ayaka", "Rosaria"};
+        String[] personajes = {"Diluc", "Bennett", "Keqing", "Kujou Sara", "Furina","Hydro Hilichurl", "Xianyun", "Maguu Kenki", "Chiori", "Zhongli", "Alhaitham", "YaoYao", "Ayaka", "Rosaria"};
         for (int i = 0; i < personajes.length; i++) {
             JCheckBox cb = new JCheckBox(personajes[i]);
             cb.setBounds(5, 30 + (i * 20), 150, 25);
@@ -213,7 +182,9 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
         }
 
     }
+    public static void main(String[] args) {
 
+    }
 
 
 }

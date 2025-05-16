@@ -4,9 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 public class Pantalla_Juego extends javax.swing.JFrame {
-    public Pantalla_Juego() {
+    private List<String> personajes1 = new ArrayList<>();
+    private List<String> personajes2 = new ArrayList<>();
+
+
+
+
+    public Pantalla_Juego(List<String> personajes1, List<String> personajes2) {
+        this.personajes1 = personajes1;
+        this.personajes2 = personajes2;
+
+
         setTitle("Juego");
         setSize(1250, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,36 +67,47 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
 
     public void ImagenesPersonajes(JLabel label) {
-        //Poner el swich segun el personajes seleccionado
-        ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("/Cartas/Diluc_Img.png"))//Es un ejemplo del proceso
-                .getImage().getScaledInstance(120,205, Image.SCALE_SMOOTH));
-        JLabel p1j1 = new JLabel(icon);//Se pondra la imagen pero por ahora no se va probar eso (probar despues)
-        JLabel p2j1 = new JLabel(icon);
-        JLabel p3j1 = new JLabel(icon);
-        JLabel p1j2 = new JLabel(icon);
-        JLabel p2j2 = new JLabel(icon);
-        JLabel p3j2 = new JLabel(icon);
+        // Jugador 1
+        //JOptionPane.showMessageDialog(null, personajes1.get(1));
 
-        p1j1.setBounds(80, 50, 120, 205);
-        p1j1.setIcon(icon);
-        p2j1.setBounds(80, 270, 120, 205);
-        p2j1.setIcon(icon);
-        p3j1.setBounds(80, 490, 120, 205);
-        p3j1.setIcon(icon);
+        for (int i = 0; i < 3; i++) {
+            String personaje = personajes1.get(i);
+            ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("/Cartas/" + personaje + "_Img.png"))
+                    .getImage().getScaledInstance(120, 205, Image.SCALE_SMOOTH));
+            JLabel personajeIMG = new JLabel(icon);
+            personajeIMG.setIcon(icon);
 
-        p1j2.setBounds(1030,50,120,205);
-        p1j2.setIcon(icon);
-        p2j2.setBounds(1030,270,120,205);
-        p2j2.setIcon(icon);
-        p3j2.setBounds(1030,490,120,205);
-        p3j2.setIcon(icon);
+            // Posiciona cada personaje según el índice
+            if (i == 0) {
+                personajeIMG.setBounds(80, 50, 120, 205);
+            } else if (i == 1) {
+                personajeIMG.setBounds(80, 270, 120, 205);
+            } else {
+                personajeIMG.setBounds(80, 490, 120, 205);
+            }
 
-        label.add(p1j1);
-        label.add(p2j1);
-        label.add(p3j1);
-        label.add(p1j2);
-        label.add(p2j2);
-        label.add(p3j2);
+            label.add(personajeIMG);
+        }
+
+        // Jugador 2
+        for (int i = 0; i < 3; i++) {
+            String personaje = personajes2.get(i);
+            ImageIcon icon = new ImageIcon(new ImageIcon(getClass().getResource("/Cartas/" + personaje + "_Img.png"))
+                    .getImage().getScaledInstance(120, 205, Image.SCALE_SMOOTH));
+            JLabel personajeIMG = new JLabel(icon);
+            personajeIMG.setIcon(icon);
+
+            // Posiciona cada personaje según el índice
+            if (i == 0) {
+                personajeIMG.setBounds(1030, 50, 120, 205);
+            } else if (i == 1) {
+                personajeIMG.setBounds(1030, 270, 120, 205);
+            } else {
+                personajeIMG.setBounds(1030, 490, 120, 205);
+            }
+
+            label.add(personajeIMG);
+        }
     }
 
 
@@ -127,8 +150,6 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         label.add(dp3j2);
     }
 
-    public static void main(String[] args) {
-        Pantalla_Juego p = new Pantalla_Juego();
-    }
+
 
 }
