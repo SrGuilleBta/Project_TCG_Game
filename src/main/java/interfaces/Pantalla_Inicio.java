@@ -1,8 +1,7 @@
 package interfaces;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Pantalla_Inicio extends javax.swing.JFrame {
 
@@ -13,8 +12,6 @@ public class Pantalla_Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        JLabel lblInicio = new JLabel();
-        add(lblInicio);
         //Aplicar fondo
         java.net.URL imgUrl = getClass().getResource("/fondos/fondoPantallaInicio.png");
         ImageIcon fondo = new ImageIcon(imgUrl);
@@ -104,7 +101,25 @@ public class Pantalla_Inicio extends javax.swing.JFrame {
             }
         });
 
-        add(lblInicio);
+        botonReglas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                Pantalla_Reglas pr = new Pantalla_Reglas();
+                pr.setVisible(true);
+                dispose();
+            }
+        });
+
+        botonEmpezar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                Pantalla_Inciar_Partida pip = new Pantalla_Inciar_Partida();
+                pip.setVisible(true);
+                dispose();
+            }
+        });
+
+
         setLocationRelativeTo(null);
         setVisible(true);
 

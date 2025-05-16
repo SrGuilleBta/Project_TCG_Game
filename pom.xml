@@ -20,6 +20,4 @@
             <version>7.0.3</version> <!-- Versión compatible con tu IDEA -->
         </dependency>
     </dependencies>
-
-
 </project>
