@@ -175,4 +175,23 @@ public class Carta_Personaje extends Habilidades_Personajes {
     public void setCartasAumentoAtk(List<Carta_Accion_Apoyo> cartasAumentoAtk) {
         this.cartasAumentoAtk = cartasAumentoAtk;
     }
+
+    @Override
+    public String toString() {
+        String texto = "";
+        texto += "   " + nombre + "\n";
+        texto += "Vida: " + vida + "\n";
+        texto += "Escudo: " + escudo + "\n";
+        texto += "Tipo de Arma: " + tipo_De_Arma + "\n";
+        texto += "Ataques Realizados: " + ataquesRealizados + "\n";
+
+        return texto;
+
+    }
+
+
+
+
+
+
 }

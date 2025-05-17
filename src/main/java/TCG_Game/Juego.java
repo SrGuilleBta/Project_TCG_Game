@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Juego {
 
-    Jugador jugdor1 = new Jugador();
-    Jugador jugdor2 = new Jugador();
+    public Jugador jugdor1 = new Jugador();
+    public Jugador jugdor2 = new Jugador();
 
     public void iniciarRonda(List<Carta_Personaje> p, List<Carta_Accion> cartasAp) { //Dado a una lista de personajes y cartas de apoyo va a recibir este programa
         jugdor1.empezarRonda();
@@ -14,10 +14,10 @@ public class Juego {
 
 
         jugdor1.maso.seleccionarDados(8);
-        //jugdor2.maso.seleccionarDados(8);
+        jugdor2.maso.seleccionarDados(8);
         if((jugdor1.maso.cartasApoyo.isEmpty() && jugdor2.maso.cartasApoyo.isEmpty())&&(jugdor1.maso.cartasEnUso.isEmpty() && jugdor2.maso.cartasEnUso.isEmpty())) {
             jugdor1.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
-            jugdor2.generarCartasPersonajes(p.get(0),p.get(1),p.get(2));
+            jugdor2.generarCartasPersonajes(p.get(3),p.get(4),p.get(5));
             for (int i =0; i<11; i++)
             {
                 //Aqui revolvemos las cartas para darles a cada jugador

@@ -41,16 +41,18 @@ public class Habilidades_Personajes {
                     }
                 }
                 break;
-            case "Hydro Hilichurl Rogue":
+            case "Hydro Hilichurl":
                 danio -=1;
                 for (Carta_Personaje companiero: equipo)
                 {
                     if (companiero.getVida() > 0)
                     {
                         companiero.setEscudo(2);
-                        personajeuso.setDanioBase(personajeuso.getDanioBase() +1);
+
                     }
+
                 }
+                personajeuso.setDanioBase(personajeuso.getDanioBase() +1);
                 break;
             case "Xianyun":
                 danio -=1;
@@ -177,13 +179,13 @@ public class Habilidades_Personajes {
                 }
                 break;
             case "Maguu Kenki":
-                danio +=5; // Kyouka Fuushi - 5 Anemo/Cryo DMG
+                danio +=6; // Kyouka Fuushi - 5 Anemo/Cryo DMG
                 break;
             case "Chiori":
                 danio +=3; // Hiyoku: Twin Blades - 5 Geo DMG
                 break;
             case "Zhongli":
-                danio +=4;// Planet Befall - 5 Geo DMG
+                danio +=5;// Planet Befall - 5 Geo DMG
                 for (Carta_Personaje companiero: equipo)
                 {
                     if (companiero.getVida() > 0)
