@@ -72,26 +72,32 @@ public class Maso {
         {
             Dados d = new Dados();
             d.elegirTipo();
-            System.out.println(d.getTipo());
             dadosJuego.add(d);
         }
-        System.out.println("-------------------------------------");
+
         for (int i = 0; i < D; i++) {
-            Elementos tipoDado = dadosJuego.get(i).getTipo();
+            Elementos tipoDado = getDadosJuego().get(i).getTipo();
             boolean esValido = tipoDado.equals(Elementos.OMNI);
-            for (Carta_Personaje p : personajes) {
+            if (esValido)
+            {
+                continue;
+            }
+            for (Carta_Personaje p : getPersonajes()) {
                 if (tipoDado.equals(p.getElemento())) {
                     esValido = true;
                     break;
                 }
             }
-
             if (!esValido) {
                 Dados d2 = new Dados();
                 d2.elegirTipo();
                 dadosJuego.get(i).setTipo(d2.getTipo());
+
             }
+
         }
+
+
 
     }
     public void eliminarDados(List<Dados> dados){//Usado para cuando se usa un ataque
