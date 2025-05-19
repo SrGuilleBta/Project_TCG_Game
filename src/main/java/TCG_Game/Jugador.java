@@ -6,6 +6,16 @@ public class Jugador {
     private Carta_Personaje pSelecionado = null;
     private Carta_Accion_Arma caaSelecionado = null;
     private Carta_Accion_Apoyo caaApSelecionado = null;
+    private int personajesSinVida=0;
+    public int getPersonajesSinVida() {
+        return personajesSinVida;
+    }
+
+    public void setPersonajesSinVida(int personajesSinVida) {
+        this.personajesSinVida = personajesSinVida;
+    }
+
+
 
     public Carta_Accion_Arma getCaaSelecionado() {
         return caaSelecionado;

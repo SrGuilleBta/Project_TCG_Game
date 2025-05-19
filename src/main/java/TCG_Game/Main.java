@@ -153,7 +153,7 @@ public class Main {
 
 
         Juego juego1 = new Juego();
-        juego1.iniciarRonda(personajes, cartasApoyo);
+        juego1.rondaInicial(personajes, cartasApoyo);
 
         for (Dados d : juego1.jugdor1.maso.dadosJuego)
         {
@@ -208,7 +208,7 @@ public class Main {
         juego1.jugdor1.termina_Ronda();
         juego1.jugdor2.termina_Ronda();
         juego1.terminaRonda();
-        juego1.iniciarRonda(personajes, cartasApoyo);
+        juego1.rondaInicial(personajes, cartasApoyo);
 
 
 

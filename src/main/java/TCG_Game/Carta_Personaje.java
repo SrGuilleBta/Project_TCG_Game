@@ -147,6 +147,16 @@ public class Carta_Personaje extends Habilidades_Personajes {
     }
 
     public void recibirDanio(int danio){
+        int dif = danio;
+        danio -= escudo;
+        escudo -= dif;
+        if(escudo<0)
+        {
+            escudo=0;
+        }
+        if(danio<0){
+            danio=0;
+        }
         vida -= danio;
         if(vida <= 0){
             vida = 0;
@@ -181,9 +191,12 @@ public class Carta_Personaje extends Habilidades_Personajes {
         String texto = "";
         texto += "   " + nombre + "\n";
         texto += "Vida: " + vida + "\n";
+        texto += "Daño Base: " + danioBase + "\n";
         texto += "Escudo: " + escudo + "\n";
         texto += "Tipo de Arma: " + tipo_De_Arma + "\n";
         texto += "Ataques Realizados: " + ataquesRealizados + "\n";
+        texto += "Costo E: " + costoE + "\n";
+        texto += "Costo D: " + costoD + "\n";
 
         return texto;
 

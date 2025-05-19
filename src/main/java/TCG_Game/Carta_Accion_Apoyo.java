@@ -58,9 +58,6 @@ public class Carta_Accion_Apoyo extends Carta_Accion{
                         jugador.getMaso().getDadosJuego().add(d);
                     }
                     break;
-                case MAS_CARTAS:
-                    jugador.getMaso().barajearCartas((5-valor));
-                    break;
             }
     }
 }

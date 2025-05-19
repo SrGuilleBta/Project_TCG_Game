@@ -6,7 +6,7 @@ public class PersonajesDisponibles {
             case "Diluc":
                 return new Carta_Personaje(Elementos.PYRO,9,"Diluc", "Dueño del Amanecer",Tipo_Arma.MANDOBLE,3,5,3 );
             case "Bennett":
-                return new Carta_Personaje(Elementos.PYRO,12,"Bennet","Entusiasta aventurero", Tipo_Arma.ESPADA, 3,4,2);
+                return new Carta_Personaje(Elementos.PYRO,12,"Bennett","Entusiasta aventurero", Tipo_Arma.ESPADA, 3,4,2);
             case "Keqing":
                 return new Carta_Personaje(Elementos.ELECTRO,10, "Keqing", "Destello Púrpura", Tipo_Arma.ESPADA, 3,4,3);
             case "Kujou Sara":

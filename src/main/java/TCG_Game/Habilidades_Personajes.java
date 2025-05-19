@@ -7,16 +7,16 @@ public class Habilidades_Personajes {
 
 
     public void elemental(Carta_Personaje personajeuso, Carta_Personaje objetivo, List<Carta_Personaje> equipo){
-        personajeuso.setAtaquesRealizados(objetivo.getAtaquesRealizados()+1);
+        personajeuso.setAtaquesRealizados(personajeuso.getAtaquesRealizados()+1);
         int danio =personajeuso.getDanioBase();
         int vidamin=20;
         switch(personajeuso.getNombre()) {
             case "Diluc":
                 //this.gastoElemental= 3;
                 danio +=2;
-
                 break;
             case "Bennett":
+                
                 danio +=1;
                 break;
             case "Keqing":
@@ -125,7 +125,9 @@ public class Habilidades_Personajes {
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
+                        System.out.println(equipo.size());
                         companiero.setDanioBase(companiero.getDanioBase() + 1);
+
                         if(companiero.getVida()< 5)
                         {
                             companiero.setVida(companiero.getVida() + 2);
@@ -143,6 +145,7 @@ public class Habilidades_Personajes {
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
+                        System.out.println("Aumento daño a "+ companiero.getNombre());
                         companiero.setDanioBase(companiero.getDanioBase() + 1);
                         if(companiero.getElemento() == Elementos.ELECTRO)
                         {
@@ -226,11 +229,6 @@ public class Habilidades_Personajes {
         if(personajeuso.getArmaEquipada() != null)
         {
             danio+=personajeuso.getArmaEquipada().getAumentoDanio();//aumentamos el daño segun el arma equipada
-        }
-        danio -= objetivo.getEscudo();
-        if(danio<0)
-        {
-            return;
         }
         objetivo.recibirDanio(danio);
     }
