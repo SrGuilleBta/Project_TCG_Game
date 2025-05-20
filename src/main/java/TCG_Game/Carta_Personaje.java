@@ -20,7 +20,7 @@ public class Carta_Personaje extends Habilidades_Personajes {
     private int escudo =0;
     private int danioBase=2;
 
-
+    private Carta_Accion_Arma armaEquipada = null;
 
 
 
@@ -39,7 +39,7 @@ public class Carta_Personaje extends Habilidades_Personajes {
     public void setEnfriamientoDef(int enfriamientoDef) {
         this.enfriamientoDef = enfriamientoDef;
     }
-    private Carta_Accion_Arma armaEquipada = null;
+
 
 
     private List<Carta_Accion_Apoyo> cartasAumentoAtk =new ArrayList<>();
@@ -191,7 +191,12 @@ public class Carta_Personaje extends Habilidades_Personajes {
         String texto = "";
         texto += "" + nombre + "\n";
         texto += "Vida: " + vida + "\n";
-        texto += "Daño Base: " + danioBase + "\n";
+        if(this.getArmaEquipada()!=null){
+            texto += "Daño Base: " + (danioBase +this.getArmaEquipada().getAumentoDanio())+ "\n";
+        }else {
+            texto += "Daño Base: " + danioBase + "\n";
+        }
+
         texto += "Escudo: " + escudo + "\n";
         texto += "Tipo Arma: " + tipo_De_Arma + "\n";
         texto += "Ataques Realizados: " + ataquesRealizados + "\n";

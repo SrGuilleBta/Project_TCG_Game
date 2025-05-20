@@ -98,14 +98,8 @@ public class Jugador {
         jugando = true;
     }
 
-    public void atacar(Jugador j)
-    {
-        //Aqui se aplicara una logica segun el jugador decida atacar
-        //pSelecionado.definitiva(pSelecionado.getNombre(),j.pSelecionado);
-    }
 
-
-    public void equiparArma()
+    public int equiparArma()
     {
         if(caaSelecionado != null)
         {
@@ -127,16 +121,20 @@ public class Jugador {
                     pSelecionado.setArmaEquipada(caaSelecionado);
                     maso.cartasEnUso.remove(caaSelecionado);
                     caaApSelecionado = null;
-                    seleccionarCartaAccion(0);
+                    /*if(!this.getMaso().getCartasEnUso().isEmpty()) {
+                        seleccionarCartaAccion(0);
+                    }*/
+                    this.setCaaSelecionado(null);
+                    return 1;
                 }
             }
         }else {
             System.out.println("No hay una arma seleccionada");
 
         }
-
+        return 0;
     }
-    public void usarCartaAccion()
+    public int usarCartaAccion()
     {
         if(caaApSelecionado != null)
         {
@@ -149,9 +147,14 @@ public class Jugador {
 
             maso.cartasEnUso.remove(caaApSelecionado);
             caaApSelecionado = null;
-            seleccionarCartaAccion(0);
+            /*if(!this.getMaso().getCartasEnUso().isEmpty()) {
+                seleccionarCartaAccion(0);
+            }*/
+            this.setCaaSelecionado(null);
+            return 1;
         }else {
             System.out.println("No hay una carta de accion seleccionada");
         }
+        return 0;
     }
 }

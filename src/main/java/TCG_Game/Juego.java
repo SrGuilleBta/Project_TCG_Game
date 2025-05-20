@@ -80,22 +80,47 @@ public class Juego {
     public void empezarRondaSecundaria(List<Carta_Accion> cartasAp) {
         jugdor1.maso.seleccionarDados(8);
         jugdor2.maso.seleccionarDados(8);
+
         if(jugdor1.getMaso().getCartasEnUso().size()<6)
         {
+
             if(jugdor1.getMaso().getCartasApoyo().size()<2)
             {
                 //Aqui revolvemos las cartas para darles a cada jugador
-                for(int i=jugdor1.getMaso().getCartasApoyo().size();i<7;i++)
+                for(int i=jugdor1.getMaso().getCartasEnUso().size();i<7;i++)
                 {
                     int index = (int)(Math.random()*cartasAp.size());
                     jugdor1.generarMasoApoyo(cartasAp.get(index));
-                    jugdor2.generarMasoApoyo(cartasAp.get(index));
+
                 }
             }
             jugdor1.maso.barajearCartas(3);
-            jugdor2.maso.barajearCartas(3);
+
+
         }
 
 
+        if(jugdor2.getMaso().getCartasEnUso().size()<6)
+        {
+
+            if(jugdor2.getMaso().getCartasApoyo().size()<2)
+            {
+                //Aqui revolvemos las cartas para darles a cada jugador
+                for(int i=jugdor2.getMaso().getCartasEnUso().size();i<7;i++)
+                {
+                    int index = (int)(Math.random()*cartasAp.size());
+                    jugdor2.generarMasoApoyo(cartasAp.get(index));
+                }
+            }
+            jugdor2.maso.barajearCartas(3);
+
+
+        }
+
+
+        jugdor1.seleccionarCartaAccion(0);
+        jugdor2.seleccionarCartaAccion(0);
+
     }
+
 }

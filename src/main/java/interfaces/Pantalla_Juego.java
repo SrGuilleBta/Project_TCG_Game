@@ -16,7 +16,8 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
     Juego juego1 = new Juego();
     List<Carta_Personaje>personajestotal = new ArrayList<>();
-    Queue<JRadioButton> rbseleccionado = new LinkedList<>();
+    Queue<JRadioButton> rbseleccionado1 = new LinkedList<>();
+    Queue<JRadioButton> rbseleccionado2 = new LinkedList<>();
 
 
     private JLabel fondoLabel;
@@ -179,6 +180,19 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
         colocarBotonesatq(fondoLabel);
         aniadirCartas();
+        for(int o =0; o< 7; o++)
+        {
+
+            lrbj1.get(o).addItemListener(limitador(cartasA1,rbseleccionado1,1));
+
+        }
+        lrbj1.get(0).setSelected(true);
+
+        for(int o =0; o< 7; o++)
+        {
+            lrbj2.get(o).addItemListener(limitador(cartasA2,rbseleccionado2,2));
+        }
+        lrbj2.get(0).setSelected(true);
         botonesUsarCarta();
 
 
@@ -286,6 +300,10 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         dp2j1.setBounds(210,270,120,205);
         label.add(dp2j1);
 
+
+
+
+
         dp3j1.removeAll();
         fondoLabel.repaint();
         text= String.valueOf(p.get(2));
@@ -294,6 +312,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         dp3j1.setFocusable(false);
         dp3j1.setBounds(210,490,120,205);
         label.add(dp3j1);
+
 
         dp1j2.removeAll();
         fondoLabel.repaint();
@@ -443,6 +462,8 @@ public class Pantalla_Juego extends javax.swing.JFrame {
                     datosP(fondoLabel,personajestotal);
                     juego1.empezarRondaSecundaria(cartasApoyo);
                     aniadirCartas();
+                    lrbj1.get(0).setSelected(true);
+                    lrbj2.get(0).setSelected(true);
                     ponerDados(fondoLabel,juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().getDadosJuego());
                     JOptionPane.showMessageDialog(null,"Ronda Terminada");
                 }else {
@@ -601,7 +622,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
 
 
-//Mantener cerrada esta seccion del codigo (esta muy larga)
+//Mantener cerrada esta seccion del codigo (esta muy larga)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public void colocarBotonesatq(JLabel label){
 
         atqBasico1.setFocusable(false);
@@ -876,8 +897,9 @@ public class Pantalla_Juego extends javax.swing.JFrame {
             }
         });
     }
+//NO HABRIR LA FUCNION POR NADA DEL MUNDO---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//NO HABRIR LA FUCNION POR NADA DEL MUNDO
+
     public void cambiaPersonajeM()
     {
         int indice=0;
@@ -962,6 +984,9 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
     public void aniadirCartas()
     {
+       /* rbseleccionado1.clear();
+        rbseleccionado2.clear();*/
+
         cartasA1.removeAll();
         cartasA1.repaint();
         cartasA1.setLayout(null);
@@ -981,16 +1006,15 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         {
             lrbj1.get(o).setVisible(false);
             cartasA1.add(lrbj1.get(o));
-            lrbj1.get(o).addItemListener(limitador(cartasA1,rbseleccionado));
+            //lrbj1.get(o).addItemListener(limitador(cartasA1,rbseleccionado1));
 
         }
         for(int o =0; o< 7; o++)
         {
             lrbj2.get(o).setVisible(false);
             cartasA2.add(lrbj2.get(o));
-            lrbj2.get(o).addItemListener(limitador(cartasA2,rbseleccionado));
+            //lrbj2.get(o).addItemListener(limitador(cartasA2,rbseleccionado2));
         }
-
 
         for (int i = 0; i < juego1.jugdor1.getMaso().getCartasEnUso().size(); i++) {
             JLabel lb = new JLabel();
@@ -1066,28 +1090,119 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
         usarCarta1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(juego1.jugdor1.getCaaApSelecionado()==null)
+                if(juego1.jugdor1.getCaaApSelecionado()!=null || juego1.jugdor1.getCaaSelecionado()!=null)
                 {
-                    juego1.jugdor1.equiparArma();
-                    aniadirCartas();
-                    ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                    if (juego1.jugdor1.getCaaApSelecionado() == null) {
+                        if(juego1.jugdor1.equiparArma() ==1) {
+                            aniadirCartas();
+                            datosP(fondoLabel, personajestotal);
+                            ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                            JOptionPane.showMessageDialog(null,"Se aplico la carta a "+ juego1.jugdor1.getpSelecionado().getNombre());
+
+                            for(Component c: cartasA1.getComponents()){
+                                if(c instanceof JRadioButton)
+                                {
+                                    ((JRadioButton) c).setSelected(false);
+                                }
+                            }
+                            if(!juego1.jugdor1.getMaso().getCartasEnUso().isEmpty())
+                            {
+                                lrbj1.get(0).setSelected(true);
+                            }
+
+
+
+                        }else {
+                            JOptionPane.showMessageDialog(null,"No se pudo Aplicar la carta");
+                        }
+                    } else {
+
+                        if (juego1.jugdor1.usarCartaAccion()==1) {
+                            datosP(fondoLabel, personajestotal);
+                            ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                            aniadirCartas();
+                            JOptionPane.showMessageDialog(null,"Se aplico la carta ");
+
+                            for(Component c: cartasA1.getComponents()){
+                                if(c instanceof JRadioButton)
+                                {
+                                    ((JRadioButton) c).setSelected(false);
+                                }
+                            }
+                            if(!juego1.jugdor1.getMaso().getCartasEnUso().isEmpty())
+                            {
+                                lrbj1.get(0).setSelected(true);
+                            }
+
+                        }else {
+                            JOptionPane.showMessageDialog(null,"No se pudo Aplicar la carta");
+                        }
+
+
+                    }
                 }else {
-                    juego1.jugdor1.usarCartaAccion();
-                    aniadirCartas();
+                    JOptionPane.showMessageDialog(null,"No hay cartas seleccionadas");
                 }
 
             }
         });
         usarCarta2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(juego1.jugdor2.getCaaApSelecionado()==null)
+                if(juego1.jugdor2.getCaaApSelecionado()!=null || juego1.jugdor2.getCaaSelecionado()!=null)
                 {
-                    juego1.jugdor2.equiparArma();
-                    aniadirCartas();
-                    ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                    if(juego1.jugdor2.getCaaApSelecionado()==null)
+                    {
+                        if(juego1.jugdor2.equiparArma() ==1) {
+                            aniadirCartas();
+                            datosP(fondoLabel, personajestotal);
+                            ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                            JOptionPane.showMessageDialog(null,"Se aplico la carta a "+ juego1.jugdor2.getpSelecionado().getNombre());
+
+
+                            for(Component c: cartasA2.getComponents()){
+                                if(c instanceof JRadioButton)
+                                {
+                                    ((JRadioButton) c).setSelected(false);
+                                }
+                            }
+                            if(!juego1.jugdor2.getMaso().getCartasEnUso().isEmpty())
+                            {
+                                lrbj2.get(0).setSelected(true);
+                            }
+
+                        }else {
+                            JOptionPane.showMessageDialog(null,"No se pudo Aplicar la carta");
+                        }
+
+
+
+                    }else {
+                        if (juego1.jugdor2.usarCartaAccion()==1)
+                        {
+                            datosP(fondoLabel, personajestotal);
+                            ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                            aniadirCartas();
+                            JOptionPane.showMessageDialog(null,"Se aplico la carta");
+
+                            for(Component c: cartasA2.getComponents()){
+                                if(c instanceof JRadioButton)
+                                {
+                                    ((JRadioButton) c).setSelected(false);
+                                }
+                            }
+
+
+                            if(!juego1.jugdor2.getMaso().getCartasEnUso().isEmpty())
+                            {
+                                lrbj2.get(0).setSelected(true);
+                            }
+
+                        }else {
+                            JOptionPane.showMessageDialog(null,"No se pudo Aplicar la carta ");
+                        }
+                    }
                 }else {
-                    juego1.jugdor2.usarCartaAccion();
-                    aniadirCartas();
+                    JOptionPane.showMessageDialog(null,"No hay cartas seleccionadas");
                 }
 
             }
@@ -1095,7 +1210,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
     }
 
 
-    public ItemListener limitador(JPanel panel, Queue<JRadioButton> radioBSeleccionado)
+    public ItemListener limitador(JPanel panel, Queue<JRadioButton> radioBSeleccionado, int i)
     {
         return new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -1109,6 +1224,32 @@ public class Pantalla_Juego extends javax.swing.JFrame {
                         radioBSeleccionado.remove(source);
                     }
                     radioBSeleccionado.add(source);
+
+
+
+
+                    if(i ==1)
+                    {
+                        for(int j =0; j <lrbj1.size(); j++)
+                        {
+                            if(lrbj1.get(j).isSelected())
+                            {
+
+                                juego1.jugdor1.seleccionarCartaAccion(j);
+
+
+                            }
+                        }
+                    }else {
+                        for(int j =0; j <lrbj2.size(); j++)
+                        {
+                            if(lrbj2.get(j).isSelected())
+                            {
+
+                                juego1.jugdor2.seleccionarCartaAccion(j);
+                            }
+                        }
+                    }
 
                 }else {
 

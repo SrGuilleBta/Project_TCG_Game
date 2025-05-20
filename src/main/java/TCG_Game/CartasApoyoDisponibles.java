@@ -8,7 +8,7 @@ public class CartasApoyoDisponibles {
 
     public static List<Carta_Accion> crearCartas(){
         //cartasApoyo.add(new Carta_Accion_Arma("WolfsGravestone", "Aumenta +3 de daño",3,Tipo_Arma.MANDOBLE,3)); (Por alguna razon no falla cuando este esta en el maso)
-        /*cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Greatsword", "Aumenta +1 de daño", 1, Tipo_Arma.MANDOBLE, 1));
+        cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Greatsword", "Aumenta +1 de daño", 1, Tipo_Arma.MANDOBLE, 1));
         cartasApoyo.add(new Carta_Accion_Arma("Skyward Pride", "Aumenta +3 de daño", 3, Tipo_Arma.MANDOBLE, 3));
         cartasApoyo.add(new Carta_Accion_Arma("The Bell", "Aumenta +2 de daño", 2, Tipo_Arma.MANDOBLE, 2));
 
@@ -25,15 +25,15 @@ public class CartasApoyoDisponibles {
         cartasApoyo.add(new Carta_Accion_Arma("Lithic Spear", "Aumenta +2 de daño", 2, Tipo_Arma.LANZA, 2));
         //cartasApoyo.add(new Carta_Accion_Arma("Skyward Spine", "Aumenta +3 de daño", 3, Tipo_Arma.LANZA, 3));
         cartasApoyo.add(new Carta_Accion_Arma("White Tassel", "Aumenta +1 de daño", 1, Tipo_Arma.LANZA, 1));
-        cartasApoyo.add(new Carta_Accion_Arma("Engulfing Lightning", "Aumenta +3 de daño", 3, Tipo_Arma.LANZA, 3));*/
+        cartasApoyo.add(new Carta_Accion_Arma("Engulfing Lightning", "Aumenta +3 de daño", 3, Tipo_Arma.LANZA, 3));
 
         cartasApoyo.add(new Carta_Accion_Arma("Aquila Favonia", "Aumenta +3 de daño", 3, Tipo_Arma.ESPADA, 3));
         cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Sword", "Aumenta +2 de daño", 2, Tipo_Arma.ESPADA, 2));
         cartasApoyo.add(new Carta_Accion_Arma("Travelers Handy Sword", "Aumenta +1 de daño", 1, Tipo_Arma.ESPADA, 1));
-        //cartasApoyo.add(new Carta_Accion_Arma("Skyward Blade", "Aumenta +3 de daño", 3, Tipo_Arma.ESPADA, 3));*/
+        //cartasApoyo.add(new Carta_Accion_Arma("Skyward Blade", "Aumenta +3 de daño", 3, Tipo_Arma.ESPADA, 3));
 
-/*
-        cartasApoyo.add(new Carta_Accion_Apoyo("Adeptus Temptation", "Aumenta 3 la vida", 2, TipoBuff.Aumentar_VIDA, 3));
+
+        cartasApoyo.add(new Carta_Accion_Apoyo("Adeptus Temptation", "Aumenta 3 la vida", 1, TipoBuff.Aumentar_VIDA, 3));
         cartasApoyo.add(new Carta_Accion_Apoyo("Chef Mao", "Aumenta 1 la vida", 0, TipoBuff.Aumentar_VIDA, 1));
         cartasApoyo.add(new Carta_Accion_Apoyo("Leave It to Me", "Aumenta 2 la vida", 1, TipoBuff.Aumentar_VIDA, 2));
         cartasApoyo.add(new Carta_Accion_Apoyo("Minty Meat Rolls", "Aumenta 1 la vida", 0, TipoBuff.Aumentar_VIDA, 1));
@@ -53,7 +53,7 @@ public class CartasApoyoDisponibles {
         cartasApoyo.add(new Carta_Accion_Apoyo("Favonius Cathedral", "Genera 1 dado omni", 1, TipoBuff.GENERAR_DADOS_OMNI, 1));
         cartasApoyo.add(new Carta_Accion_Apoyo("Liben", "Genera 2 dados omni", 2, TipoBuff.GENERAR_DADOS_OMNI, 2));
         cartasApoyo.add(new Carta_Accion_Apoyo("Paimon", "Genera 3 dados omni", 2, TipoBuff.GENERAR_DADOS_OMNI, 3));
-        cartasApoyo.add(new Carta_Accion_Apoyo("Strategize", "Genera 3 dados ommi", 2, TipoBuff.GENERAR_DADOS_OMNI, 3));*/
+        cartasApoyo.add(new Carta_Accion_Apoyo("Strategize", "Genera 3 dados ommi", 2, TipoBuff.GENERAR_DADOS_OMNI, 3));
 
 
         return cartasApoyo;
