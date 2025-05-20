@@ -55,23 +55,21 @@ public class Pantalla_Inicio extends javax.swing.JFrame {
                     margin-top: 100px;
                 }
                 .welcome-title {
-                    color: #ffffff; /* Dorado Genshin */
+                    color: #ffffff;
                     font-size: 40px;
                     font-weight: bold;
-                    /* Contorno negro (4 sombras en todas las direcciones) */
                     text-shadow: 
                         -1px -1px 0 #000000,
                         1px -1px 0 #000000,
                         -1px 1px 0 #000000,
                         1px 1px 0 #000000,
-                        0 0 10px rgba(255, 215, 0, 0.7); /* Brillo dorado adicional */
+                        0 0 10px rgba(255, 215, 0, 0.7);
                     letter-spacing: 2px;
                     margin-bottom: 20px;
                 }
                 .subtitle {
-                    color: #E8D8B0; /* Crema dorado */
+                    color: #E8D8B0; 
                     font-size: 20px;
-                    /* Contorno negro para el subtítulo */
                     text-shadow: 
                         -1px -1px 0 #000,
                         1px -1px 0 #000,

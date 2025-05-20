@@ -100,10 +100,6 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
                 if(i ==6)
                 {
 
-
-
-
-
                     for(Component c : panelj1.getComponents()) {
                         if(c instanceof JCheckBox) {
                             if(((JCheckBox) c).isSelected()) {
@@ -118,12 +114,6 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
                             }
                         }
                     }
-
-
-
-
-
-
 
                     setVisible(false);
                     Pantalla_Juego p = new Pantalla_Juego(personajes1,personajes2);
@@ -180,11 +170,8 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
             cb.addItemListener(limitador(panel, cbSeleccionado));
             panel.add(cb);
         }
-
     }
-    public static void main(String[] args) {
 
-    }
 
 
 }

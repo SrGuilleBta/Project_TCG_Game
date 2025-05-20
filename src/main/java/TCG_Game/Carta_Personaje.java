@@ -189,12 +189,13 @@ public class Carta_Personaje extends Habilidades_Personajes {
     @Override
     public String toString() {
         String texto = "";
-        texto += "   " + nombre + "\n";
+        texto += "" + nombre + "\n";
         texto += "Vida: " + vida + "\n";
         texto += "Daño Base: " + danioBase + "\n";
         texto += "Escudo: " + escudo + "\n";
-        texto += "Tipo de Arma: " + tipo_De_Arma + "\n";
+        texto += "Tipo Arma: " + tipo_De_Arma + "\n";
         texto += "Ataques Realizados: " + ataquesRealizados + "\n";
+        texto += "Cooldown D:"+ enfriamientoDef + "\n";
         texto += "Costo E: " + costoE + "\n";
         texto += "Costo D: " + costoD + "\n";
 

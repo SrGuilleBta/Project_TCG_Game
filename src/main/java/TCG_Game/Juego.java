@@ -28,7 +28,8 @@ public class Juego {
               //Aqui revolvemos las cartas para darles a cada jugador
              int index = (int)(Math.random()*cartasAp.size());
              jugdor1.generarMasoApoyo(cartasAp.get(index));
-             jugdor2.generarMasoApoyo(cartasAp.get(index));
+             int index2 = (int)(Math.random()*cartasAp.size());
+             jugdor2.generarMasoApoyo(cartasAp.get(index2));
         }
         jugdor1.maso.barajearCartas(0);
         jugdor2.maso.barajearCartas(0);
@@ -38,6 +39,7 @@ public class Juego {
         jugdor1.selecccionarPersonaje(0);
         jugdor2.selecccionarPersonaje(0);
         jugdor1.seleccionarCartaAccion(0);
+        jugdor2.seleccionarCartaAccion(0);
         //System.out.println(jugdor1.maso.getCartasEnUso().get(0).nombre);
 
 
@@ -78,7 +80,7 @@ public class Juego {
     public void empezarRondaSecundaria(List<Carta_Accion> cartasAp) {
         jugdor1.maso.seleccionarDados(8);
         jugdor2.maso.seleccionarDados(8);
-        if(jugdor1.getMaso().getCartasEnUso().size()<7)
+        if(jugdor1.getMaso().getCartasEnUso().size()<6)
         {
             if(jugdor1.getMaso().getCartasApoyo().size()<2)
             {

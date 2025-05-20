@@ -7,6 +7,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.*;
 import java.util.List;
 
@@ -14,7 +16,8 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
     Juego juego1 = new Juego();
     List<Carta_Personaje>personajestotal = new ArrayList<>();
-    List<Carta_Accion>cartasAccion = CartasApoyoDisponibles.crearCartas();
+    Queue<JRadioButton> rbseleccionado = new LinkedList<>();
+
 
     private JLabel fondoLabel;
     private JPanel paneldados1 = new JPanel();
@@ -47,6 +50,30 @@ public class Pantalla_Juego extends javax.swing.JFrame {
     private JButton atqElemental2 = new JButton();
     private JButton atqDefinitiva2 = new JButton();
 
+    //Botones para usar carta
+    private JButton usarCarta1 = new JButton();
+    private JButton usarCarta2 = new JButton();
+
+    //RadioButtons para las cartas accion
+    private JRadioButton rbc1j1 = new JRadioButton(); //radio button carta 1 jugador 1
+    private JRadioButton rbc2j1 = new JRadioButton();
+    private JRadioButton rbc3j1 = new JRadioButton();
+    private JRadioButton rbc4j1 = new JRadioButton();
+    private JRadioButton rbc5j1 = new JRadioButton();
+    private JRadioButton rbc6j1 = new JRadioButton();
+    private JRadioButton rbc7j1 = new JRadioButton();
+    private JRadioButton rbc1j2 = new JRadioButton();
+    private JRadioButton rbc2j2 = new JRadioButton();
+    private JRadioButton rbc3j2 = new JRadioButton();
+    private JRadioButton rbc4j2 = new JRadioButton();
+    private JRadioButton rbc5j2 = new JRadioButton();
+    private JRadioButton rbc6j2 = new JRadioButton();
+    private JRadioButton rbc7j2 = new JRadioButton();
+    List<JRadioButton> lrbj1 = new ArrayList<>();
+    List<JRadioButton> lrbj2 = new ArrayList<>();
+
+
+
 
 
 
@@ -67,34 +94,30 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         this.pSeleccionado2 = pSeleccionado2;
     }
 
-    //Esto sera por mientras
-    Carta_Accion_Arma lamentodelDragon = new Carta_Accion_Arma(
-            "Lamento del Dragón",
-            "El personaje equipado recibe +1 de daño con ataques normales. Si el personaje es Diluc, recibe +2 en su lugar.",
-            3,
-            Tipo_Arma.MANDOBLE,
-            1
-    );
 
-    // Apoyo: Sucursal de Wangshu
-    Carta_Accion_Apoyo wangshuInn = new Carta_Accion_Apoyo(
-            "Sucursal de Wangshu",
-            "Al final de tu turno, cura 1 punto de vida a tu personaje inactivo con menor vida.",
-            2,
-            TipoBuff.Aumentar_VIDA,
-            3
-    );
-    public List<Carta_Accion>cartasApoyo = new ArrayList<>();
+    public List<Carta_Accion>cartasApoyo = CartasApoyoDisponibles.crearCartas();
 
 //_-----------------------------------------------------------------------------------
 
 
 
     public Pantalla_Juego(List<String> personajes1, List<String> personajes2) {
-        //Proceso de incio de juego
-        cartasApoyo.add(lamentodelDragon);
-        cartasApoyo.add(wangshuInn);
+        lrbj1.add(rbc1j1);
+        lrbj1.add(rbc2j1);
+        lrbj1.add(rbc3j1);
+        lrbj1.add(rbc4j1);
+        lrbj1.add(rbc5j1);
+        lrbj1.add(rbc6j1);
+        lrbj1.add(rbc7j1);
 
+        lrbj2.add(rbc1j2);
+        lrbj2.add(rbc2j2);
+        lrbj2.add(rbc3j2);
+        lrbj2.add(rbc4j2);
+        lrbj2.add(rbc5j2);
+        lrbj2.add(rbc6j2);
+        lrbj2.add(rbc7j2);
+        //Proceso de incio de juego
         this.personajes1 = personajes1;
         this.personajes2 = personajes2;
 
@@ -104,6 +127,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         for (String personaje : personajes2) {
             personajestotal.add(PersonajesDisponibles.crearPersonaje(personaje));
         }
+
         juego1.rondaInicial(personajestotal,cartasApoyo);
         // Configuracion del form
         setTitle("Juego");
@@ -154,6 +178,8 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
 
         colocarBotonesatq(fondoLabel);
+        aniadirCartas();
+        botonesUsarCarta();
 
 
 //_---------------------------------------------------------------------------------
@@ -416,6 +442,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
                     borrarBotonnes(j);
                     datosP(fondoLabel,personajestotal);
                     juego1.empezarRondaSecundaria(cartasApoyo);
+                    aniadirCartas();
                     ponerDados(fondoLabel,juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().getDadosJuego());
                     JOptionPane.showMessageDialog(null,"Ronda Terminada");
                 }else {
@@ -574,7 +601,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
 
 
 
-
+//Mantener cerrada esta seccion del codigo (esta muy larga)
     public void colocarBotonesatq(JLabel label){
 
         atqBasico1.setFocusable(false);
@@ -825,9 +852,9 @@ public class Pantalla_Juego extends javax.swing.JFrame {
                         juego1.cambiarTurno();
                         borrarBotonnes(juego1);
                         datosP(fondoLabel, personajestotal);
-                        if(juego1.jugdor2.getpSelecionado().getVida() == 0){
-                            juego1.jugdor2.setPersonajesSinVida(juego1.jugdor2.getPersonajesSinVida()+1);
-                            if(juego1.jugdor2.getPersonajesSinVida() == 3){
+                        if(juego1.jugdor1.getpSelecionado().getVida() == 0){
+                            juego1.jugdor1.setPersonajesSinVida(juego1.jugdor1.getPersonajesSinVida()+1);
+                            if(juego1.jugdor1.getPersonajesSinVida() == 3){
                                 JOptionPane.showMessageDialog(null,"El juego ha terminado \nGanador Jugador 2");
                                 setVisible(false);
                                 dispose();
@@ -850,7 +877,7 @@ public class Pantalla_Juego extends javax.swing.JFrame {
         });
     }
 
-
+//NO HABRIR LA FUCNION POR NADA DEL MUNDO
     public void cambiaPersonajeM()
     {
         int indice=0;
@@ -906,17 +933,25 @@ public class Pantalla_Juego extends javax.swing.JFrame {
     {
         if(j.turno == 1)
         {
+            usarCarta2.setVisible(false);
+            atqBasico2.setVisible(false);
             atqElemental2.setVisible(false);
             atqDefinitiva2.setVisible(false);
             bcambiar2.setVisible(false);
+
+            usarCarta1.setVisible(true);
             atqBasico1.setVisible(true);
             atqElemental1.setVisible(true);
             atqDefinitiva1.setVisible(true);
             bcambiar1.setVisible(true);
         }else {
+            usarCarta1.setVisible(false);
+            atqBasico1.setVisible(false);
             atqElemental1.setVisible(false);
             atqDefinitiva1.setVisible(false);
             bcambiar1.setVisible(false);
+
+            usarCarta2.setVisible(true);
             atqBasico2.setVisible(true);
             atqElemental2.setVisible(true);
             atqDefinitiva2.setVisible(true);
@@ -925,7 +960,164 @@ public class Pantalla_Juego extends javax.swing.JFrame {
     }
 
 
+    public void aniadirCartas()
+    {
+        cartasA1.removeAll();
+        cartasA1.repaint();
+        cartasA1.setLayout(null);
+        cartasA1.setBounds(350, 50, 190, 647);
+        cartasA1.setVisible(true);
+        fondoLabel.add(cartasA1);
 
+
+        cartasA2.removeAll();
+        cartasA2.repaint();
+        cartasA2.setLayout(null);
+        cartasA2.setBounds(710,50,190,647);
+        cartasA2.setVisible(true);
+        fondoLabel.add(cartasA2);
+
+        for(int o =0; o< 7; o++)
+        {
+            lrbj1.get(o).setVisible(false);
+            cartasA1.add(lrbj1.get(o));
+            lrbj1.get(o).addItemListener(limitador(cartasA1,rbseleccionado));
+
+        }
+        for(int o =0; o< 7; o++)
+        {
+            lrbj2.get(o).setVisible(false);
+            cartasA2.add(lrbj2.get(o));
+            lrbj2.get(o).addItemListener(limitador(cartasA2,rbseleccionado));
+        }
+
+
+        for (int i = 0; i < juego1.jugdor1.getMaso().getCartasEnUso().size(); i++) {
+            JLabel lb = new JLabel();
+            lb.setOpaque(true);
+            lb.setBackground(Color.WHITE); // Fondo blanco para debug
+            lb.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Borde más grueso
+            lb.setBounds(5, 5 + (i * 90), 60, 85);
+            ponerImagenesCartas(lb,i,1);
+
+
+            lrbj1.get(i).setVisible(true);
+            lrbj1.get(i).setOpaque(false);
+            lrbj1.get(i).setText("");
+            lrbj1.get(i).setBounds(65, 5 + (i * 90), 20, 20);
+
+
+
+            cartasA1.add(lb);
+        }
+
+
+        for (int i = 0; i < juego1.jugdor2.getMaso().getCartasEnUso().size(); i++) {
+            JLabel lb = new JLabel();
+            lb.setOpaque(false);
+            lb.setBackground(Color.WHITE); // Fondo blanco para debug
+            lb.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Borde más grueso
+            lb.setBounds(125, 5 + (i * 90), 60, 85);
+            ponerImagenesCartas(lb,i,2);
+
+            lrbj2.get(i).setVisible(true);
+            lrbj2.get(i).setOpaque(true);
+            lrbj2.get(i).setText("");
+            lrbj2.get(i).setBounds(100, 5 + (i * 90), 20, 20);
+
+
+            cartasA2.add(lb);
+        }
+
+    }
+
+    public void ponerImagenesCartas(JLabel lb, int i, int j)
+    {
+
+        if(j ==1)
+        {
+            String carta = juego1.jugdor1.getMaso().cartasEnUso.get(i).getNombre();
+            ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("/Cartas/"+ carta+"_Img.png"))
+                    .getImage().getScaledInstance(lb.getWidth(), lb.getHeight(), Image.SCALE_SMOOTH));
+            lb.setIcon(imagen);
+        }else {
+            String carta = juego1.jugdor2.getMaso().cartasEnUso.get(i).getNombre();
+            ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("/Cartas/"+carta+"_Img.png"))
+                    .getImage().getScaledInstance(lb.getWidth(), lb.getHeight(), Image.SCALE_SMOOTH));
+            lb.setIcon(imagen);
+        }
+
+    }
+
+
+    public void botonesUsarCarta()
+    {
+        usarCarta1.setFocusable(false);
+        usarCarta2.setFocusable(false);
+
+        usarCarta1.setText("Usar Carta");
+        usarCarta2.setText("Usar Carta");
+
+        usarCarta1.setBounds(350,700,120,45);
+        usarCarta2.setBounds(710,700,120,45);
+        fondoLabel.add(usarCarta1);
+        fondoLabel.add(usarCarta2);
+
+
+        usarCarta1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(juego1.jugdor1.getCaaApSelecionado()==null)
+                {
+                    juego1.jugdor1.equiparArma();
+                    aniadirCartas();
+                    ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                }else {
+                    juego1.jugdor1.usarCartaAccion();
+                    aniadirCartas();
+                }
+
+            }
+        });
+        usarCarta2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(juego1.jugdor2.getCaaApSelecionado()==null)
+                {
+                    juego1.jugdor2.equiparArma();
+                    aniadirCartas();
+                    ponerDados(fondoLabel, juego1.jugdor1.getMaso().getDadosJuego(), juego1.jugdor2.getMaso().dadosJuego);
+                }else {
+                    juego1.jugdor2.usarCartaAccion();
+                    aniadirCartas();
+                }
+
+            }
+        });
+    }
+
+
+    public ItemListener limitador(JPanel panel, Queue<JRadioButton> radioBSeleccionado)
+    {
+        return new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                JRadioButton source = (JRadioButton) e.getSource();
+
+                if(source.isSelected()){
+                    if(!radioBSeleccionado.isEmpty())
+                    {
+                        JRadioButton radioB = radioBSeleccionado.iterator().next();
+                        radioB.setSelected(false);
+                        radioBSeleccionado.remove(source);
+                    }
+                    radioBSeleccionado.add(source);
+
+                }else {
+
+                    radioBSeleccionado.remove(source);
+                }
+                panel.repaint();
+            }
+        };
+    }
 }
 
 

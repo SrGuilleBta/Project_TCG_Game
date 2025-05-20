@@ -58,9 +58,12 @@ public class Habilidades_Personajes {
                 danio -=1;
                 vidamin =20;
                 for (Carta_Personaje companiero: equipo){
-                    if(companiero.getVida() < vidamin)
+                    if(companiero.getVida() > 0)
                     {
-                        vidamin = companiero.getVida();
+                        if(companiero.getVida() < vidamin)
+                        {
+                            vidamin = companiero.getVida();
+                        }
                     }
                 }
                 for (Carta_Personaje companiero: equipo)
@@ -86,9 +89,12 @@ public class Habilidades_Personajes {
                 danio -=1;
                 vidamin=20;
                 for (Carta_Personaje companiero: equipo){
-                    if(companiero.getVida() < vidamin)
+                    if(companiero.getVida() > 0)
                     {
-                        vidamin = companiero.getVida();
+                        if(companiero.getVida() < vidamin)
+                        {
+                            vidamin = companiero.getVida();
+                        }
                     }
                 }
                 for (Carta_Personaje companiero: equipo)
