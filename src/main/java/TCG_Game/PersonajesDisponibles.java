@@ -1,6 +1,11 @@
 package TCG_Game;
 
 public class PersonajesDisponibles {
+    /**
+     *
+     * @param nombre nombre del personaje que queremos crear
+     * @return retona el objeto Carta_Personaje
+     */
     public static Carta_Personaje crearPersonaje(String nombre) {
         switch (nombre) {
             case "Diluc":

@@ -1,32 +1,21 @@
 package TCG_Game;
 
 public class Carta_Accion_Apoyo extends Carta_Accion{
-    private TipoBuff tipoBuff;
-    private  int valor;
+    private TipoBuff tipoBuff; //variable para indicar la naturaleza de la carta (Que es lo que hace)
+    private  int valor; //variable sirve para indicar la cantidad de buffo (cuantos dados, vida, ataque dara)
 
-
+//Constructor
     public Carta_Accion_Apoyo(String nombre, String descripcion, int costo, TipoBuff tipoBuff, int valor) {
         super(nombre, descripcion, costo);
         this.tipoBuff = tipoBuff;
         this.valor = valor;
     }
 
-    public TipoBuff getTipoBuff() {
-        return tipoBuff;
-    }
 
-    public void setTipoBuff(TipoBuff tipoBuff) {
-        this.tipoBuff = tipoBuff;
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
+    /**
+     * @param jugador Objeto de tipo jugador que nos sirvira para acceder al maso y a lista de los personajes para los buffos correspondientes
+     * @apiNote Funcion que dependinendo de buff de la carta se haran la acciones correspondientes
+     */
     @Override
     public void aplicarEfecto(Jugador jugador) {
             switch (tipoBuff){

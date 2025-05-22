@@ -1,5 +1,6 @@
 package interfaces;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -8,34 +9,25 @@ import java.util.ArrayList;
 
 
 public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
+    private JButton regresar = new JButton(); //Boton para regresar a la pantalla de inicio
+    private JButton bEmpezar = new JButton();//Boton para empezar la partida (ir a la pantalla juego)
 
-    public List<String> getPersonajes1() {
-        return personajes1;
-    }
+    public List<String> personajes1 = new ArrayList<>(); //Lista para almacenar los nombres de los personajes seleccionados por el jugador 1
+    public List<String> personajes2 = new ArrayList<>();//Lista para almacenar los nombres de los personajes seleccionados por el jugador 2
 
-    public void setPersonajes1(List<String> personajes1) {
-        this.personajes1 = personajes1;
-    }
 
-    public List<String> getPersonajes2() {
-        return personajes2;
-    }
-
-    public void setPersonajes2(List<String> personajes2) {
-        this.personajes2 = personajes2;
-    }
-
-    public List<String> personajes1 = new ArrayList<>();
-    public List<String> personajes2 = new ArrayList<>();
-
+    /**
+     * Aqui se pone todo lo que conlleva la pantalla de iniciar partida
+     */
     public Pantalla_Inciar_Partida() {
 
+        //Configuramos el form
         setTitle("Empezar Partida");
         setSize(1250, 800);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
-
+//Generar un fondo a la pantalla
         java.net.URL imgUrl = getClass().getResource("/fondos/fondoEmpezarPartida.png");
         ImageIcon fondo = new ImageIcon(imgUrl);
         Image imagenEscalada = fondo.getImage().getScaledInstance(1250, 800, Image.SCALE_SMOOTH);
@@ -43,12 +35,17 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
         fondoLabel.setBounds(0, 0, 1250, 800);
         add(fondoLabel);
 
-        // Botón regresar
-        JButton regresar = new JButton("Regresar");
+        // Botón regresar (configuración )
+        configurarBoton(regresar, "Regresar");
         regresar.setBounds(10,10,100,30);
         regresar.setFocusable(false);
         fondoLabel.add(regresar);
+
         regresar.addActionListener(new ActionListener() {
+            /**
+             * @apiNote funcion es para cambiarnos de form de inicio
+             * @param e the event to be processed
+             */
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 Pantalla_Inicio p = new Pantalla_Inicio();
@@ -57,18 +54,23 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
             }
         });
 
-        // Panel para los check box del jugador 1
+        // Panel para los check box del jugador 1 Vamos a poner los JCheckBox para seleccionar los personajes)
         JPanel panelj1 = new JPanel();
         panelj1.setLayout(null);
-        panelj1.setBounds(70, 130, 250, 500);
+        panelj1.setBounds(70, 200, 250, 350);
+        panelj1.setBackground(new Color(242,193,115));
+        panelj1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         fondoLabel.add(panelj1);
 
-        // Panel para los check box del jugador 2
+        // Panel para los check box del jugador 2 (Igual que el panel de arriba )
         JPanel panelj2 = new JPanel();
         panelj2.setLayout(null);
-        panelj2.setBounds(920, 130, 250, 500);
+        panelj2.setBounds(920, 200, 250, 350);
+        panelj2.setBackground(new Color(242,193,115));
+        panelj2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         fondoLabel.add(panelj2);
 
+        //llamamos a la funcion para crearJCheckBoc
         crearCBlb1(panelj1);
         crearCBlb1(panelj2);
 
@@ -76,11 +78,16 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
 
 
         // Botones
-        JButton bEmpezar = new JButton("Empezar");
+        //Configuracion de bEmpezar
+        configurarBoton(bEmpezar,"Empezar");
         bEmpezar.setBounds(565, 360, 100, 30);
         bEmpezar.setFocusable(false);
         fondoLabel.add(bEmpezar);
         bEmpezar.addActionListener(new ActionListener() {
+            /**
+             * Es para cambiarnos al form de pantalla_juego pero primero verificamos que los jugadores hayan seleccionado 3 persoanjes cada uno
+             * @param e the event to be processed
+             */
             public void actionPerformed(ActionEvent e) {
                 int i =0;
                 for(Component c : panelj1.getComponents()) {
@@ -131,6 +138,12 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
     }
 
 
+    /**
+     *Usado para limitar a 3 los JRadioButtons seleccionados
+     * @param panel Es el panel donde estan los JCheckBox
+     * @param cbSeleccionado Es la cola de los JCheckBox seleccionados
+     * @return Retorna un ItemListener
+     */
     public ItemListener limitador(JPanel panel, Queue<JCheckBox> cbSeleccionado)
     {
         return new ItemListener() {
@@ -154,24 +167,52 @@ public class Pantalla_Inciar_Partida extends javax.swing.JFrame {
         };
     }
 
+    /**
+     * Sirve para crear los JCheckBox con los nombres de los personajes
+     * @param panel
+     */
     public void crearCBlb1(JPanel panel) {
         Queue<JCheckBox>cbSeleccionado = new LinkedList<JCheckBox>();
         JTextPane textPane = new JTextPane();
         textPane.setEditable(false);
         textPane.setBounds(0, 0, 200, 25);
         textPane.setText("Seleccione 3 personajes");
+        textPane.setOpaque(false);
+        textPane.setForeground(Color.BLACK);
+        textPane.setFont(new Font("Segoe UI", Font.BOLD, 14));
         textPane.setFocusable(false);
         panel.add(textPane);
-        String[] personajes = {"Diluc", "Bennett", "Keqing", "Kujou Sara", "Furina","Hydro Hilichurl", "Xianyun", "Maguu Kenki", "Chiori", "Zhongli", "Alhaitham", "YaoYao", "Ayaka", "Rosaria"};
+        String[] personajes = {"Diluc", "Bennett", "Keqing", "Kujou Sara","Furina","Hydro Hilichurl", "Xianyun", "Maguu Kenki", "Chiori", "Zhongli", "Alhaitham", "YaoYao", "Ayaka", "Rosaria"};
         for (int i = 0; i < personajes.length; i++) {
             JCheckBox cb = new JCheckBox(personajes[i]);
             cb.setBounds(5, 30 + (i * 20), 150, 25);
             cb.setFocusable(false);
             cb.addItemListener(limitador(panel, cbSeleccionado));
+            cb.setOpaque(false);
+            cb.setForeground(Color.BLACK);
+            cb.setFont(new Font("Segoe UI", Font.BOLD, 14));
             panel.add(cb);
         }
     }
 
+    /**
+     * Funcion que sirve para darle diseño a los botones
+     * @param boton Es el button que vamos a modificar
+     * @param texto Texto que vamos a ponerle al button
+     */
+    private void configurarBoton(JButton boton, String texto) {
+        boton.setText(texto);
+        boton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        boton.setForeground(Color.BLACK);
 
+        boton.setBackground(Color.WHITE);
+        boton.setOpaque(true);
+        boton.setContentAreaFilled(true);
+
+
+        Border lineBorder = BorderFactory.createLineBorder(new Color(212, 175, 55), 2);
+        boton.setBorder(BorderFactory.createCompoundBorder(lineBorder,lineBorder));
+        boton.setBorderPainted(true);
+    }
 
 }

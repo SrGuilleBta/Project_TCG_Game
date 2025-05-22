@@ -12,18 +12,16 @@ public class Carta_Personaje extends Habilidades_Personajes {
     private int vida;
     private int costoE;//Son los costos para realizar cada habilidad
     private int costoD;//Son los costos para realizar cada habilidad
-    private int enfriamientoDef;
+    private int enfriamientoDef;//Esto es un atributo que indica cuantos ataques ocupa un personaje para habilitar la habilidad definitiva
+
+    private int ataquesRealizados=0; //Atributo para contar los ataque que realiza un personaje
+    private int escudo =0;//Atributo usado para el calculo de daño que recibiera un personaje
+    private int danioBase=2; //Daño de base que hace cada personaje
+
+    private Carta_Accion_Arma armaEquipada = null;//Atributo para almacenar el objeto correspondiente a la arma, para poder hacer calculos de daño
 
 
-
-    private int ataquesRealizados=0;
-    private int escudo =0;
-    private int danioBase=2;
-
-    private Carta_Accion_Arma armaEquipada = null;
-
-
-
+//GETTERS AND SETTERS
     public int getAtaquesRealizados() {
         return ataquesRealizados;
     }
@@ -39,10 +37,6 @@ public class Carta_Personaje extends Habilidades_Personajes {
     public void setEnfriamientoDef(int enfriamientoDef) {
         this.enfriamientoDef = enfriamientoDef;
     }
-
-
-
-    private List<Carta_Accion_Apoyo> cartasAumentoAtk =new ArrayList<>();
 
 
     public Carta_Accion_Arma getArmaEquipada() {
@@ -128,6 +122,7 @@ public class Carta_Personaje extends Habilidades_Personajes {
 
 
     //Metodos
+    //Constrotor
     public Carta_Personaje(Elementos elemento, int vida, String nombre, String descripcion,  Tipo_Arma tipo_De_Arma, int costoE, int costoD, int enfriamientoDef) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -140,12 +135,18 @@ public class Carta_Personaje extends Habilidades_Personajes {
     }
 
 
-
-
+    /**
+     * @param puntosDeVida - variable que indica la vida que se va a aumentar
+     */
     public void ganarVida(int puntosDeVida){
         this.vida+=puntosDeVida;
     }
 
+
+    /**
+     * @param danio varible usada para ver cuanto daño esta por recibir un personaje
+     * @apiNote la funcion calcula el daño final que recibira el personaje dependiendo si del escudo que tenga
+     */
     public void recibirDanio(int danio){
         int dif = danio;
         danio -= escudo;
@@ -167,6 +168,10 @@ public class Carta_Personaje extends Habilidades_Personajes {
     }
 
 
+    /**
+     * @param objetivo Objeto de tipo Carta_Personaje que usara el metodo recibirDanio para recibir daño
+     * @apiNote Esta funcion hace que el personaje haga un ataque simple ademas hacemos un calculo de daño dependiendo si tiene una arma equipada o no
+     */
     public void ataqueBasico(Carta_Personaje objetivo ){
         ataquesRealizados+=1;
         int danioT = this.danioBase;
@@ -178,13 +183,7 @@ public class Carta_Personaje extends Habilidades_Personajes {
 
     }
 
-    public List<Carta_Accion_Apoyo> getCartasAumentoAtk() {
-        return cartasAumentoAtk;
-    }
 
-    public void setCartasAumentoAtk(List<Carta_Accion_Apoyo> cartasAumentoAtk) {
-        this.cartasAumentoAtk = cartasAumentoAtk;
-    }
 
     @Override
     public String toString() {

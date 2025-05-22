@@ -1,5 +1,8 @@
 package TCG_Game;
 
+/**
+ * Sirve para tener todos los bufs disponibles
+ */
 public enum TipoBuff {
     Aumentar_VIDA,
     AUMETENTAR_ATAQUE,

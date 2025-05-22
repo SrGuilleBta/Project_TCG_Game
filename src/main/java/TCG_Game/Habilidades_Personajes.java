@@ -6,13 +6,19 @@ import java.util.List;
 public class Habilidades_Personajes {
 
 
+    /**
+     *
+     * @param personajeuso es el personaje que va a realizar el ataque
+     * @param objetivo es el personaje que va a recibir el ataque
+     * @param equipo lista de los personajes que hay en el equipo
+     * @apiNote Dependiendo del nombre del personaje el ataque elemental se aplicara de forma diferente
+     */
     public void elemental(Carta_Personaje personajeuso, Carta_Personaje objetivo, List<Carta_Personaje> equipo){
         personajeuso.setAtaquesRealizados(personajeuso.getAtaquesRealizados()+1);
         int danio =personajeuso.getDanioBase();
         int vidamin=20;
         switch(personajeuso.getNombre()) {
             case "Diluc":
-                //this.gastoElemental= 3;
                 danio +=2;
                 break;
             case "Bennett":
@@ -27,7 +33,7 @@ public class Habilidades_Personajes {
                 break;
             case "Furina":
                 danio -=1;
-                for (Carta_Personaje companiero: equipo)
+                for (Carta_Personaje companiero: equipo) //ademas de realizar un ataque cura a los miembros del equipo
                 {
                     if (companiero.getVida() > 0)
                     {
@@ -43,7 +49,7 @@ public class Habilidades_Personajes {
                 break;
             case "Hydro Hilichurl":
                 danio -=1;
-                for (Carta_Personaje companiero: equipo)
+                for (Carta_Personaje companiero: equipo) //Ademas de atacar pone un escudo a los miembros del equipo
                 {
                     if (companiero.getVida() > 0)
                     {
@@ -57,7 +63,7 @@ public class Habilidades_Personajes {
             case "Xianyun":
                 danio -=1;
                 vidamin =20;
-                for (Carta_Personaje companiero: equipo){
+                for (Carta_Personaje companiero: equipo){ //Ademas de atacar cura al miembro con menor vida
                     if(companiero.getVida() > 0)
                     {
                         if(companiero.getVida() < vidamin)
@@ -88,7 +94,7 @@ public class Habilidades_Personajes {
             case "Yaoyao":
                 danio -=1;
                 vidamin=20;
-                for (Carta_Personaje companiero: equipo){
+                for (Carta_Personaje companiero: equipo){ //Ademas de atacar cura al miembro con menor vida
                     if(companiero.getVida() > 0)
                     {
                         if(companiero.getVida() < vidamin)
@@ -119,6 +125,14 @@ public class Habilidades_Personajes {
         objetivo.recibirDanio(danio);
     }
 
+    /**
+     *
+     * @param personajeuso es el personaje que va a realizar el ataque
+     * @param objetivo es el personaje que va a recibir el ataque
+     *  @param equipo lista de los personajes que hay en el equipo
+     *  @apiNote Dependiendo del nombre del personaje el ataque definitiva se aplicara de forma diferente
+     *
+     *     */
     public void definitiva(Carta_Personaje personajeuso, Carta_Personaje objetivo, List<Carta_Personaje> equipo) {
         personajeuso.setAtaquesRealizados(0);
         int danio =personajeuso.getDanioBase();
@@ -132,7 +146,7 @@ public class Habilidades_Personajes {
                     if (companiero.getVida() > 0)
                     {
                         System.out.println(equipo.size());
-                        companiero.setDanioBase(companiero.getDanioBase() + 1);
+                        companiero.setDanioBase(companiero.getDanioBase() + 1);//Aumenta el ataque de todos los personajes del equipo  y cura dependiendo de cuanta vida tenga
 
                         if(companiero.getVida()< 5)
                         {
@@ -151,11 +165,12 @@ public class Habilidades_Personajes {
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
-                        System.out.println("Aumento daño a "+ companiero.getNombre());
+                         //aumenta el daño base y la vida si el compañero es de elemento electro
                         companiero.setDanioBase(companiero.getDanioBase() + 1);
                         if(companiero.getElemento() == Elementos.ELECTRO)
                         {
                             companiero.setVida(companiero.getVida() + 2);
+                            companiero.setDanioBase(companiero.getDanioBase() + 2);
                         }
                     }
                 }
@@ -165,6 +180,7 @@ public class Habilidades_Personajes {
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
+                        //Aumenta el daño y la vida
                         companiero.setVida(companiero.getVida() + 1);
                         companiero.setDanioBase(companiero.getDanioBase() + 1);
                         if (companiero.getVida()>5)
@@ -180,21 +196,23 @@ public class Habilidades_Personajes {
                 break;
             case "Xianyun":
                 danio +=2;
+                //Aumenta la vida
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
-                        companiero.setVida(companiero.getVida() + 1);
+                        companiero.setVida(companiero.getVida() + 2);
                     }
                 }
                 break;
             case "Maguu Kenki":
-                danio +=6; // Kyouka Fuushi - 5 Anemo/Cryo DMG
+                danio +=6;
                 break;
             case "Chiori":
-                danio +=3; // Hiyoku: Twin Blades - 5 Geo DMG
+                danio +=3;
                 break;
             case "Zhongli":
-                danio +=5;// Planet Befall - 5 Geo DMG
+                danio +=5;
+                //Pone un escudo a todo el equipo
                 for (Carta_Personaje companiero: equipo)
                 {
                     if (companiero.getVida() > 0)
@@ -206,23 +224,27 @@ public class Habilidades_Personajes {
                 break;
             case "Alhaitham":
                 danio +=3;
-                personajeuso.setDanioBase(personajeuso.getDanioBase() + 1);
+                //Aumenta su daño
+                personajeuso.setDanioBase(personajeuso.getDanioBase() + 2);
                 break;
             case "Yaoyao":
                 danio +=2;
+                //Cura al personaje en uso
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {
-                        companiero.setVida(companiero.getVida() + 1);
+                        companiero.setVida(companiero.getVida() + 2);
                     }
                 }
                 break;
             case "Ayaka":
                 danio +=3;
-                personajeuso.setDanioBase(personajeuso.getDanioBase() + 1);
+                //Aumenta su daño
+                personajeuso.setDanioBase(personajeuso.getDanioBase() + 2);
                 break;
             case "Rosaria":
                 danio +=1;
+                //Aumenta su daño y de los demas
                 for (Carta_Personaje companiero: equipo){
                     if (companiero.getVida() > 0)
                     {

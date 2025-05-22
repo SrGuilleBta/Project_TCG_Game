@@ -4,33 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartasApoyoDisponibles {
-    public static List<Carta_Accion>cartasApoyo = new ArrayList();
+    public static List<Carta_Accion>cartasApoyo = new ArrayList(); //Es la lista de todas las cartas
 
+    /**
+     *
+     * @return retorna una lista de todos los cartas de apoyo disponibles
+     */
     public static List<Carta_Accion> crearCartas(){
-        //cartasApoyo.add(new Carta_Accion_Arma("WolfsGravestone", "Aumenta +3 de daño",3,Tipo_Arma.MANDOBLE,3)); (Por alguna razon no falla cuando este esta en el maso)
         cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Greatsword", "Aumenta +1 de daño", 1, Tipo_Arma.MANDOBLE, 1));
         cartasApoyo.add(new Carta_Accion_Arma("Skyward Pride", "Aumenta +3 de daño", 3, Tipo_Arma.MANDOBLE, 3));
         cartasApoyo.add(new Carta_Accion_Arma("The Bell", "Aumenta +2 de daño", 2, Tipo_Arma.MANDOBLE, 2));
 
         cartasApoyo.add(new Carta_Accion_Arma("Raven Bow", "Aumenta +1 de daño", 1, Tipo_Arma.ARCO, 1));
-       // cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Bow", "Aumenta +2 de daño", 2, Tipo_Arma.ARCO, 2));
         cartasApoyo.add(new Carta_Accion_Arma("Skyward Harp", "Aumenta +3 de daño", 3, Tipo_Arma.ARCO, 3));
         cartasApoyo.add(new Carta_Accion_Arma("Amos Bow", "Aumenta +3 de daño", 3, Tipo_Arma.ARCO, 3));
 
-       // cartasApoyo.add(new Carta_Accion_Arma("Magic Guide", "Aumenta +1 de daño", 1, Tipo_Arma.CATALIZADOR, 1));
         cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Fragments", "Aumenta +2 de daño", 2, Tipo_Arma.CATALIZADOR, 2));
         cartasApoyo.add(new Carta_Accion_Arma("Skyward Atlas", "Aumenta +3 de daño", 3, Tipo_Arma.CATALIZADOR, 3));
         cartasApoyo.add(new Carta_Accion_Arma("A Thousand Floating Dreams", "Aumenta +3 de daño", 3, Tipo_Arma.CATALIZADOR, 3));
 
         cartasApoyo.add(new Carta_Accion_Arma("Lithic Spear", "Aumenta +2 de daño", 2, Tipo_Arma.LANZA, 2));
-        //cartasApoyo.add(new Carta_Accion_Arma("Skyward Spine", "Aumenta +3 de daño", 3, Tipo_Arma.LANZA, 3));
         cartasApoyo.add(new Carta_Accion_Arma("White Tassel", "Aumenta +1 de daño", 1, Tipo_Arma.LANZA, 1));
         cartasApoyo.add(new Carta_Accion_Arma("Engulfing Lightning", "Aumenta +3 de daño", 3, Tipo_Arma.LANZA, 3));
 
         cartasApoyo.add(new Carta_Accion_Arma("Aquila Favonia", "Aumenta +3 de daño", 3, Tipo_Arma.ESPADA, 3));
         cartasApoyo.add(new Carta_Accion_Arma("Sacrificial Sword", "Aumenta +2 de daño", 2, Tipo_Arma.ESPADA, 2));
         cartasApoyo.add(new Carta_Accion_Arma("Travelers Handy Sword", "Aumenta +1 de daño", 1, Tipo_Arma.ESPADA, 1));
-        //cartasApoyo.add(new Carta_Accion_Arma("Skyward Blade", "Aumenta +3 de daño", 3, Tipo_Arma.ESPADA, 3));
 
 
         cartasApoyo.add(new Carta_Accion_Apoyo("Adeptus Temptation", "Aumenta 3 la vida", 1, TipoBuff.Aumentar_VIDA, 3));
